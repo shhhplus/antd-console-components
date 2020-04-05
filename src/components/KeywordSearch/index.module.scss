@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  :global {
+    .ant-input-affix-wrapper {
+      width: 320px;
+    }
+  }
+}

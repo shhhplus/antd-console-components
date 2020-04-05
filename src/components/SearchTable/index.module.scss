@@ -1,0 +1,9 @@
+.header {
+  margin-bottom: 16px;
+
+  :global {
+    .ant-pagination-total-text {
+      line-height: 32px;
+    }
+  }
+}

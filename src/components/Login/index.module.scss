@@ -1,0 +1,26 @@
+.bg {
+  background: #f6f9fc;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.main {
+  width: 360px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px 20px 20px 20px;
+}
+
+.title {
+  margin-bottom: 15px;
+}
+
+.actions {
+  padding-top: 5px;
+}

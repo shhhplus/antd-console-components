@@ -1,0 +1,35 @@
+.spreader {
+  background: #ffffff;
+  box-shadow: 0px 2px 8px 0px #ececec;
+  border-radius: 4px;
+  padding: 20px 24px;
+
+  &.closed {
+    .content {
+      height: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #343434;
+  line-height: 32px;
+  cursor: pointer;
+
+  .icon {
+    margin-left: 20px;
+  }
+}
+
+.content {
+  margin-top: 20px;
+  overflow: hidden;
+}

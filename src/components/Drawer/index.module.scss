@@ -1,0 +1,46 @@
+.drawer {
+  :global {
+    .ant-drawer-close {
+      left: -32px;
+
+      &:before {
+        position: absolute;
+        content: '';
+        height: 54px;
+        width: 54px;
+        background: url('./icon-react.svg') no-repeat;
+        background-position: -10px;
+        background-size: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      .anticon-close {
+        margin-left: -12px;
+        font-size: 14px;
+        vertical-align: 0;
+      }
+    }
+
+    .ant-drawer-content {
+      overflow: visible;
+    }
+
+    .ant-drawer-wrapper-body {
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      height: 100%;
+    }
+
+    .ant-drawer-body {
+      padding: 40px !important;
+      // flex-grow: 1;
+      // display: flex;
+      // flex-direction: column;
+      height: 100%;
+      overflow: auto;
+    }
+  }
+}
