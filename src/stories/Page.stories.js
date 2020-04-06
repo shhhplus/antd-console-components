@@ -118,13 +118,13 @@ storiesOf('Page', module)
     return (
       <Demo>
         <Page title="我的服务" anchor={anchor}>
-          <Section id="pg0">
+          <div style={{ marginBottom: '40px' }}>
             <Spreader title="基本信息">
               <div>这里是基本信息</div>
               <div>这里是基本信息</div>
               <div>这里是基本信息</div>
             </Spreader>
-          </Section>
+          </div>
           <Section id="pg1" title="模块1">
             {content}
           </Section>
@@ -141,10 +141,6 @@ storiesOf('Page', module)
             {content}
           </Section>
           <Section id="pg6" title="模块6">
-            {content}
-            {content}
-            {content}
-            {content}
             {content}
             {content}
             {content}

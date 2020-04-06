@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 // import { withKnobs, text, number, array } from '@storybook/addon-knobs/react';
-import { Row, Col } from 'antd';
+import { Row, Col, Card } from 'antd';
 import FieldInfo from '../components/FieldInfo';
 import Ellipsis from '../components/Ellipsis';
 
@@ -18,7 +18,7 @@ storiesOf('FieldInfo', module)
     const labelWidth = 60;
     const marginBottom = 10;
     return (
-      <div>
+      <Card>
         <FieldInfo
           labelWidth={labelWidth}
           marginBottom={marginBottom}
@@ -49,7 +49,7 @@ storiesOf('FieldInfo', module)
           label="代表作品"
           value="碟中谍系列、壮志凌云"
         />
-      </div>
+      </Card>
     );
   })
   .add('列表使用', () => {
@@ -72,13 +72,17 @@ storiesOf('FieldInfo', module)
       },
     ];
 
-    return <FieldInfoList labelWidth={100} marginBottom={5} infos={infos} />;
+    return (
+      <Card>
+        <FieldInfoList labelWidth={100} marginBottom={5} infos={infos} />
+      </Card>
+    );
   })
   .add('网格使用', () => {
     const labelWidth = 60;
     const marginBottom = 10;
     return (
-      <Fragment>
+      <Card>
         <Row style={{ marginBottom }}>
           <Col span={6}>
             <FieldInfo
@@ -139,22 +143,24 @@ storiesOf('FieldInfo', module)
             />
           </Col>
         </Row>
-      </Fragment>
+      </Card>
     );
   })
   .add('超出显示省略号', () => {
     const labelWidth = 60;
     return (
       <div style={{ width: '300px' }}>
-        <FieldInfo
-          labelWidth={labelWidth}
-          label="个人介绍"
-          value={
-            <Ellipsis tooltip={true}>
-              汤姆·克鲁斯，1962年7月3日出生于美国纽约，演员、制片人。1981年，出演剧情片《熄灯号》，从而出道。1984年，凭借主演的喜剧片《乖仔也疯狂》获得第41届美国金球奖音乐喜剧类最佳男主角提名。
-            </Ellipsis>
-          }
-        />
+        <Card>
+          <FieldInfo
+            labelWidth={labelWidth}
+            label="个人介绍"
+            value={
+              <Ellipsis tooltip={true}>
+                汤姆·克鲁斯，1962年7月3日出生于美国纽约，演员、制片人。1981年，出演剧情片《熄灯号》，从而出道。1984年，凭借主演的喜剧片《乖仔也疯狂》获得第41届美国金球奖音乐喜剧类最佳男主角提名。
+              </Ellipsis>
+            }
+          />
+        </Card>
       </div>
     );
   });

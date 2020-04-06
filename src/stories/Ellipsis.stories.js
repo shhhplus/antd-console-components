@@ -7,7 +7,7 @@ const Demo = ({ children }) => {
   return (
     <div
       style={{
-        background: '#F6F9FC',
+        background: '#ffffff',
         width: '200px',
         margin: '120px 0 0 100px',
       }}

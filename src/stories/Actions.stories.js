@@ -10,7 +10,7 @@ Actions.config({
 storiesOf('Actions', module)
   .add('标准', () => {
     return (
-      <div style={{ background: '#F6F9FC', padding: '20px' }}>
+      <div style={{ background: '#ffffff', padding: '20px' }}>
         <Actions spacing={12}>
           <Button>重启</Button>
           <Button type="primary">删除</Button>

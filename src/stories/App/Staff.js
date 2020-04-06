@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo } from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Card } from 'antd';
 import { Link as RelativeLink } from '@shhhplus/react-router-relative-link';
 import { PlusOutlined } from '@ant-design/icons';
 import Page from '../../components/Page';
@@ -94,35 +94,37 @@ export default () => {
           instanceRef.current.search();
         }}
       >
-        <SearchTable
-          header={
-            <KeywordSearch
-              left={extra}
-              onSubmit={(keyword) => {
-                instanceRef.current.search({
-                  values: { keyword },
-                });
-              }}
+        <Card>
+          <SearchTable
+            header={
+              <KeywordSearch
+                left={extra}
+                onSubmit={(keyword) => {
+                  instanceRef.current.search({
+                    values: { keyword },
+                  });
+                }}
+              />
+            }
+            rowKey={(record) => record.id.toString()}
+            search={search}
+            onRef={(instance) => {
+              instanceRef.current = instance;
+            }}
+          >
+            <Column
+              title="姓名"
+              dataIndex="name"
+              sorter={true}
+              filters={[
+                { text: 'Joe', value: 'Joe' },
+                { text: 'Jim', value: 'Jim' },
+              ]}
             />
-          }
-          rowKey={(record) => record.id.toString()}
-          search={search}
-          onRef={(instance) => {
-            instanceRef.current = instance;
-          }}
-        >
-          <Column
-            title="姓名"
-            dataIndex="name"
-            sorter={true}
-            filters={[
-              { text: 'Joe', value: 'Joe' },
-              { text: 'Jim', value: 'Jim' },
-            ]}
-          />
-          <Column title="手机号" dataIndex="cellphone" />
-          <Column title="地址" dataIndex="address" />
-        </SearchTable>
+            <Column title="手机号" dataIndex="cellphone" />
+            <Column title="地址" dataIndex="address" />
+          </SearchTable>
+        </Card>
       </Page>
     </DrawerEntryPage>
   );
