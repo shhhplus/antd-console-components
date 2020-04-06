@@ -1,19 +1,21 @@
 import React, { FC, ReactNode, useCallback, useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Actions from '../Actions';
 import styles from './index.module.scss';
 
-interface LoginProps {
+export interface LoginProps {
   title: ReactNode;
   bgStyle: Object;
   onSubmit: (values: Object) => Promise<void>;
+  onSuccess: () => void;
 }
 
 const Login: FC<LoginProps> = ({
   title = '登录',
   bgStyle,
   onSubmit,
+  onSuccess,
 }: LoginProps) => {
   const [form] = Form.useForm();
   const [processing, setProcessing] = useState(false);
@@ -27,9 +29,13 @@ const Login: FC<LoginProps> = ({
     form.validateFields().then(
       (values) => {
         if (onSubmit) {
-          onSubmit(values).finally(() => {
-            setProcessing(false);
-          });
+          onSubmit(values)
+            .then(onSuccess, (msg) => {
+              msg && message.error(msg);
+            })
+            .finally(() => {
+              setProcessing(false);
+            });
         } else {
           setProcessing(false);
         }
