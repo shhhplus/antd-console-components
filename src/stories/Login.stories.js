@@ -3,26 +3,56 @@ import { Button } from 'antd';
 import { storiesOf } from '@storybook/react';
 import Login from '../components/Login';
 
-export const Basic = () => {
-  const submit = (values) => {
-    console.log('submit', values);
-    return new Promise((resolve) => setTimeout(resolve, 1000));
-  };
-
-  return <Login title="欢迎登录" onSubmit={submit} />;
+const Success = () => {
+  return (
+    <Login
+      title="欢迎登录"
+      onSubmit={(values) => {
+        console.log('submit', values);
+        return new Promise((resolve) => setTimeout(resolve, 1000));
+      }}
+      onSuccess={() => {
+        console.log('登录成功');
+      }}
+    />
+  );
 };
 
-export const CustomizeBg = () => {
+const Fail = () => {
+  return (
+    <Login
+      title="欢迎登录"
+      onSubmit={(values) => {
+        console.log('submit', values);
+        return new Promise((resolve, reject) =>
+          setTimeout(() => {
+            reject('登录失败，失败原因为。。。');
+          }, 1000),
+        );
+      }}
+      onSuccess={() => {}}
+    />
+  );
+};
+
+const CustomizeBg = () => {
   const bgStyle = {
     background: 'lightgray',
   };
 
-  const submit = (values) => {
-    console.log('submit', values);
-    return new Promise((resolve) => setTimeout(resolve, 1000));
-  };
-
-  return <Login bgStyle={bgStyle} onSubmit={submit} />;
+  return (
+    <Login
+      bgStyle={bgStyle}
+      onSubmit={(values) => {
+        console.log('submit', values);
+        return new Promise((resolve) => setTimeout(resolve, 1000));
+      }}
+      onSuccess={() => {}}
+    />
+  );
 };
 
-storiesOf('Login', module).add('基本', Basic).add('定制背景', CustomizeBg);
+storiesOf('Login', module)
+  .add('登录成功', Success)
+  .add('登录失败', Fail)
+  .add('定制背景', CustomizeBg);

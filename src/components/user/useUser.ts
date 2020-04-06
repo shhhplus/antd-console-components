@@ -1,21 +1,25 @@
-import { useState, useEffect } from 'react';
-import { User, UseUserResult } from '../types';
+import { useState, useEffect, useMemo } from 'react';
+import { GetUser, UseUserResult } from '../types';
 import { useFetch } from '../hooks';
-
-type GetUser = () => Promise<User>;
 
 let _setGetUser: (gu: GetUser) => void;
 
-const useUser = (): UseUserResult => {
-  const [getUser, setGetUser] = useState<GetUser>(() =>
-    Promise.resolve(undefined),
-  );
+const useUser = (fn: GetUser | undefined | null): UseUserResult => {
+  const [getUser, setGetUser] = useState<GetUser | undefined | null>();
 
   useEffect(() => {
     _setGetUser = setGetUser;
   }, []);
 
-  return useFetch(getUser);
+  useEffect(() => {
+    setGetUser(() => fn);
+  }, [fn]);
+
+  const getUser2use = useMemo(() => {
+    return getUser ? getUser : () => Promise.resolve(null);
+  }, [getUser]);
+
+  return useFetch(getUser2use);
 };
 
 useUser.init = (gu: GetUser) => {

@@ -6,6 +6,8 @@ interface Userinfo {
 
 export type User = Userinfo | null | undefined;
 
+export type GetUser = () => Promise<User>;
+
 export interface UseFetchResult {
   data: any;
   fetching: boolean;
