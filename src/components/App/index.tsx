@@ -6,7 +6,8 @@ import {
   Redirect,
   Link,
 } from 'react-router-dom';
-import { Layout, Menu, Spin } from 'antd';
+import { Layout, Menu } from 'antd';
+import Initializing from '../Initializing';
 import { GetUser } from '../types';
 import { useUser } from '../user';
 import styles from './index.module.scss';
@@ -23,14 +24,6 @@ interface Props {
   routes: Array<any>;
   menus: Array<any>;
 }
-
-const Initialize = () => {
-  return (
-    <Spin spinning={true} tip="系统正在初始化">
-      <div style={{ height: '300px' }}></div>
-    </Spin>
-  );
-};
 
 const Menus = ({ menus }: { menus: Array<any> }) => {
   return (
@@ -69,7 +62,7 @@ export default ({ getUser, Login, routes, menus }: Props) => {
   }, [user]);
 
   if (!initialized) {
-    return <Initialize />;
+    return <Initializing />;
   }
 
   if (!user.data) {
