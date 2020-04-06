@@ -1,9 +1,11 @@
 import React from 'react';
+import { Button } from 'antd';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
 import { FundOutlined } from '@ant-design/icons';
 import Section from '../components/Section';
+import Actions from '../components/Actions';
 
 const Demo = ({ children }) => {
   return <div style={{ padding: '20px' }}>{children}</div>;
@@ -34,6 +36,22 @@ storiesOf('Section', module)
     return (
       <Demo>
         <Section title="我的服务" onFresh={() => {}}>
+          {content}
+        </Section>
+      </Demo>
+    );
+  })
+  .add('带操作按钮', () => {
+    const extra = (
+      <Actions spacing={12}>
+        <Button>重启</Button>
+        <Button type="primary">删除</Button>
+        <Button type="primary">编辑标签</Button>
+      </Actions>
+    );
+    return (
+      <Demo>
+        <Section title="我的服务" extra={extra}>
           {content}
         </Section>
       </Demo>

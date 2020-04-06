@@ -11,7 +11,7 @@ const marginBottom = 10;
 export default () => {
   return (
     <Page title="主面板">
-      <Section>
+      <div style={{ marginBottom: '40px' }}>
         <Spreader title="基本信息">
           <Row style={{ marginBottom }}>
             <Col span={6}>
@@ -74,7 +74,7 @@ export default () => {
             </Col>
           </Row>
         </Spreader>
-      </Section>
+      </div>
 
       <Section title="我的待办">
         <div style={{ padding: '0 0 60px 0' }}>todo 1</div>

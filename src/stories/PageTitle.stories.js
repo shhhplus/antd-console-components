@@ -7,9 +7,7 @@ import PageTitle from '../components/PageTitle';
 import Actions from '../components/Actions';
 
 const Demo = ({ children }) => {
-  return (
-    <div style={{ background: '#F6F9FC', padding: '20px' }}>{children}</div>
-  );
+  return <div style={{ padding: '20px' }}>{children}</div>;
 };
 
 storiesOf('PageTitle', module)

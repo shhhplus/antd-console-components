@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { storiesOf } from '@storybook/react';
 // import { withKnobs } from '@storybook/addon-knobs/react';
-import { Form, Input, Button, Popconfirm } from 'antd';
+import { Form, Input, Button, Popconfirm, Card } from 'antd';
 import SearchTable from '../components/SearchTable';
 import KeywordSearch from '../components/KeywordSearch';
 
@@ -68,57 +68,59 @@ const StandardDemo = (() => {
     }, [instanceRef]);
 
     return (
-      <SearchTable
-        header={
-          <CustomizeSearchForm
-            onSearchSubmit={(values) => {
-              instanceRef.current.search({ values, current: 1 });
+      <Card>
+        <SearchTable
+          header={
+            <CustomizeSearchForm
+              onSearchSubmit={(values) => {
+                instanceRef.current.search({ values, current: 1 });
+              }}
+            />
+          }
+          rowKey={(record) => record.id}
+          pageSize={5}
+          search={search}
+          onRef={(instance) => {
+            instanceRef.current = instance;
+          }}
+        >
+          <Column
+            title="姓名"
+            key="name"
+            dataIndex="name"
+            sorter={true}
+            filters={[
+              { text: 'Joe', value: 'Joe' },
+              { text: 'Jim', value: 'Jim' },
+            ]}
+          />
+          <Column
+            title="年龄"
+            key="age"
+            dataIndex="age"
+            sorter={(a, b) => a.age - b.age}
+          />
+          <Column title="地址" key="address" dataIndex="address" />
+          <Column
+            title="操作"
+            key="actions"
+            render={() => {
+              return (
+                <Popconfirm
+                  title="Are you sure delete this task?"
+                  onConfirm={() => {
+                    instanceRef.current.search();
+                  }}
+                  okText="确定"
+                  cancelText="取消"
+                >
+                  <a>删除</a>
+                </Popconfirm>
+              );
             }}
           />
-        }
-        rowKey={(record) => record.id}
-        pageSize={5}
-        search={search}
-        onRef={(instance) => {
-          instanceRef.current = instance;
-        }}
-      >
-        <Column
-          title="姓名"
-          key="name"
-          dataIndex="name"
-          sorter={true}
-          filters={[
-            { text: 'Joe', value: 'Joe' },
-            { text: 'Jim', value: 'Jim' },
-          ]}
-        />
-        <Column
-          title="年龄"
-          key="age"
-          dataIndex="age"
-          sorter={(a, b) => a.age - b.age}
-        />
-        <Column title="地址" key="address" dataIndex="address" />
-        <Column
-          title="操作"
-          key="actions"
-          render={() => {
-            return (
-              <Popconfirm
-                title="Are you sure delete this task?"
-                onConfirm={() => {
-                  instanceRef.current.search();
-                }}
-                okText="确定"
-                cancelText="取消"
-              >
-                <a>删除</a>
-              </Popconfirm>
-            );
-          }}
-        />
-      </SearchTable>
+        </SearchTable>
+      </Card>
     );
   };
 
@@ -188,24 +190,26 @@ const KeywordSearchDemo = (() => {
     ];
 
     return (
-      <SearchTable
-        header={
-          <KeywordSearch
-            left={extra}
-            onSubmit={(keyword) => {
-              instanceRef.current.search({
-                values: { keyword },
-              });
-            }}
-          />
-        }
-        rowKey={(record) => record.id}
-        columns={columns}
-        search={search}
-        onRef={(instance) => {
-          instanceRef.current = instance;
-        }}
-      ></SearchTable>
+      <Card>
+        <SearchTable
+          header={
+            <KeywordSearch
+              left={extra}
+              onSubmit={(keyword) => {
+                instanceRef.current.search({
+                  values: { keyword },
+                });
+              }}
+            />
+          }
+          rowKey={(record) => record.id}
+          columns={columns}
+          search={search}
+          onRef={(instance) => {
+            instanceRef.current = instance;
+          }}
+        ></SearchTable>
+      </Card>
     );
   };
 
@@ -268,25 +272,27 @@ const NoPaginationDemo = (() => {
     ];
 
     return (
-      <SearchTable
-        header={
-          <KeywordSearch
-            left={extra}
-            onSubmit={(keyword) => {
-              instanceRef.current.search({
-                values: { keyword },
-              });
-            }}
-          />
-        }
-        rowKey={(record) => record.id}
-        columns={columns}
-        paginationShown={false}
-        search={search}
-        onRef={(instance) => {
-          instanceRef.current = instance;
-        }}
-      ></SearchTable>
+      <Card>
+        <SearchTable
+          header={
+            <KeywordSearch
+              left={extra}
+              onSubmit={(keyword) => {
+                instanceRef.current.search({
+                  values: { keyword },
+                });
+              }}
+            />
+          }
+          rowKey={(record) => record.id}
+          columns={columns}
+          paginationShown={false}
+          search={search}
+          onRef={(instance) => {
+            instanceRef.current = instance;
+          }}
+        ></SearchTable>
+      </Card>
     );
   };
 
@@ -349,14 +355,16 @@ const NoSearchFormDemo = (() => {
     ];
 
     return (
-      <SearchTable
-        rowKey={(record) => record.id}
-        columns={columns}
-        search={search}
-        onRef={(instance) => {
-          instanceRef.current = instance;
-        }}
-      />
+      <Card>
+        <SearchTable
+          rowKey={(record) => record.id}
+          columns={columns}
+          search={search}
+          onRef={(instance) => {
+            instanceRef.current = instance;
+          }}
+        />
+      </Card>
     );
   };
 
@@ -413,24 +421,26 @@ const NoDataDemo = (() => {
     ];
 
     return (
-      <SearchTable
-        header={
-          <KeywordSearch
-            left={extra}
-            onSubmit={(keyword) => {
-              instanceRef.current.search({
-                values: { keyword },
-              });
-            }}
-          />
-        }
-        rowKey={(record) => record.id}
-        columns={columns}
-        search={search}
-        onRef={(instance) => {
-          instanceRef.current = instance;
-        }}
-      ></SearchTable>
+      <Card>
+        <SearchTable
+          header={
+            <KeywordSearch
+              left={extra}
+              onSubmit={(keyword) => {
+                instanceRef.current.search({
+                  values: { keyword },
+                });
+              }}
+            />
+          }
+          rowKey={(record) => record.id}
+          columns={columns}
+          search={search}
+          onRef={(instance) => {
+            instanceRef.current = instance;
+          }}
+        ></SearchTable>
+      </Card>
     );
   };
 
