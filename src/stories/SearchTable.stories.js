@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { storiesOf } from '@storybook/react';
 // import { withKnobs } from '@storybook/addon-knobs/react';
 import { Form, Input, Button, Popconfirm } from 'antd';
@@ -12,28 +12,26 @@ const StandardDemo = (() => {
     const [form] = Form.useForm();
 
     return (
-      <Fragment>
-        <Form layout="inline" form={form}>
-          <Form.Item label="姓名" name="username" rules={[]}>
-            <Input />
-          </Form.Item>
-          <Form.Item label="地址" name="address" rules={[]}>
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              onClick={() => {
-                form.validateFields((err, values) => {
-                  onSearchSubmit && onSearchSubmit(values);
-                });
-              }}
-            >
-              查询
-            </Button>
-          </Form.Item>
-        </Form>
-      </Fragment>
+      <Form layout="inline" form={form}>
+        <Form.Item label="姓名" name="username" rules={[]}>
+          <Input />
+        </Form.Item>
+        <Form.Item label="地址" name="address" rules={[]}>
+          <Input />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            onClick={() => {
+              form.validateFields((err, values) => {
+                onSearchSubmit && onSearchSubmit(values);
+              });
+            }}
+          >
+            查询
+          </Button>
+        </Form.Item>
+      </Form>
     );
   };
 

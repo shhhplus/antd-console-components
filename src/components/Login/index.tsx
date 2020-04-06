@@ -44,7 +44,7 @@ const Login: FC<LoginProps> = ({
         setProcessing(false);
       },
     );
-  }, [form, processing, onSubmit]);
+  }, [form, processing, onSubmit, onSuccess]);
 
   const reset = useCallback(() => {
     form.resetFields();
