@@ -11,7 +11,7 @@ const marginBottom = 10;
 export default () => {
   return (
     <Page title="主面板">
-      <div style={{ marginBottom: '40px' }}>
+      <div style={{ marginBottom: '20px' }}>
         <Spreader title="基本信息">
           <Row style={{ marginBottom }}>
             <Col span={6}>
@@ -76,13 +76,13 @@ export default () => {
         </Spreader>
       </div>
 
-      <Section title="我的待办">
+      <Section title="我的待办" onFresh={() => {}}>
         <div style={{ padding: '0 0 60px 0' }}>todo 1</div>
         <div style={{ padding: '0 0 60px 0' }}>todo 2</div>
         <div style={{ padding: '0 0 60px 0' }}>todo 3</div>
       </Section>
 
-      <Section title="通知">
+      <Section title="通知" onFresh={() => {}}>
         <div style={{ padding: '0 0 60px 0' }}>notification 1</div>
         <div style={{ padding: '0 0 60px 0' }}>notification 2</div>
         <div style={{ padding: '0 0 60px 0' }}>notification 3</div>

@@ -89,7 +89,7 @@ export default () => {
   return (
     <DrawerEntryPage routes={routes}>
       <Page
-        title="主面板"
+        title="员工管理"
         onFresh={() => {
           instanceRef.current.search();
         }}
