@@ -64,6 +64,7 @@ export default ({ getUser, Login, routes, menus }: Props) => {
   const user = useUser(getUser2use);
 
   const onLoginSuccess = useCallback(() => {
+    setInitialized(false);
     user.fetch();
   }, [user]);
 
