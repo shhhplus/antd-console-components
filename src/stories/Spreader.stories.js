@@ -2,15 +2,27 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
-import { Button, Card } from 'antd';
+import { Button } from 'antd';
 import Spreader from '../components/Spreader';
 import Actions from '../components/Actions';
+
+const Wrapper = ({ children }) => {
+  return (
+    <div
+      style={{
+        padding: '20px',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 storiesOf('Spreader', module)
   // .addDecorator(withKnobs)
   .add('标准', () => {
     return (
-      <Card>
+      <Wrapper>
         <Spreader title="基本信息">
           <div>this is content</div>
           <div>this is content</div>
@@ -18,7 +30,7 @@ storiesOf('Spreader', module)
           <div>this is content</div>
           <div>this is content</div>
         </Spreader>
-      </Card>
+      </Wrapper>
     );
   })
   .add('带操作按钮', () => {
@@ -30,7 +42,7 @@ storiesOf('Spreader', module)
       </Actions>
     );
     return (
-      <Card>
+      <Wrapper>
         <Spreader title="基本信息" extra={extra}>
           <div>this is content</div>
           <div>this is content</div>
@@ -38,12 +50,12 @@ storiesOf('Spreader', module)
           <div>this is content</div>
           <div>this is content</div>
         </Spreader>
-      </Card>
+      </Wrapper>
     );
   })
   .add('控制展开', () => {
     return (
-      <Card>
+      <Wrapper>
         <Spreader title="基本信息" opened={false}>
           <div>this is content</div>
           <div>this is content</div>
@@ -51,6 +63,6 @@ storiesOf('Spreader', module)
           <div>this is content</div>
           <div>this is content</div>
         </Spreader>
-      </Card>
+      </Wrapper>
     );
   });

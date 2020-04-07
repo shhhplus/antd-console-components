@@ -7,6 +7,7 @@ import {
   Link,
 } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import Initializing from '../Initializing';
 import { GetUser } from '../types';
 import { useUser } from '../user';
@@ -61,6 +62,10 @@ export default ({ getUser, Login, routes, menus }: Props) => {
     user.fetch();
   }, [user]);
 
+  const toggle = useCallback(() => {
+    setCollapsed(!collapsed);
+  }, [collapsed]);
+
   if (!initialized) {
     return <Initializing />;
   }
@@ -79,6 +84,7 @@ export default ({ getUser, Login, routes, menus }: Props) => {
             position: 'fixed',
             left: 0,
           }}
+          trigger={null}
           collapsed={collapsed}
           collapsible={true}
           onCollapse={(collapsed, type) => {
@@ -92,7 +98,11 @@ export default ({ getUser, Login, routes, menus }: Props) => {
           className={styles['right']}
           style={{ marginLeft: collapsed ? 80 : 200 }}
         >
-          <Header className={styles['header']} />
+          <Header className={styles['header']}>
+            <span className={styles['trigger']} onClick={toggle}>
+              {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            </span>
+          </Header>
           <Content className={styles['content']}>
             <Switch>
               {/* <Route path="/login" exact component={Login} /> */}
