@@ -1,0 +1,12 @@
+.trigger {
+  padding: 0 12px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.025);
+  }
+}
+
+.name {
+  padding-left: 8px;
+}
