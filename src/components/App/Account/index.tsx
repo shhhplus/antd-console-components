@@ -19,7 +19,7 @@ export default ({ userinfo, onLogoutSubmit, onLogoutSuccess }: Props) => {
     onLogoutSubmit().then(onLogoutSuccess, (msg) => {
       msg && message.error(msg);
     });
-  }, [onLogoutSubmit]);
+  }, [onLogoutSubmit, onLogoutSuccess]);
 
   const menu = useMemo(() => {
     return (
