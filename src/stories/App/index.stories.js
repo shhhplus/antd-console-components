@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 import App from '../../components/App';
 import Login from '../../components/Login';
@@ -8,17 +8,30 @@ import menus from './menus';
 
 const _admin = {
   id: 1,
-  name: 'mark',
-  avata: 'https://',
+  name: 'admin',
+  avatar:
+    'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
   password: '123456',
 };
 
-let user = null;
+const user = {
+  get: () => {
+    const json = window.localStorage.getItem('user');
+    if (json) {
+      return JSON.parse(json);
+    } else {
+      return null;
+    }
+  },
+  set: (user) => {
+    window.localStorage.setItem('user', user ? JSON.stringify(user) : '');
+  },
+};
 
 const getUser = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(user);
+      resolve(user.get());
     }, 500);
   });
 };
@@ -26,19 +39,33 @@ const getUser = () => {
 const LoginPage = ({ onSuccess }) => {
   const submit = useCallback(({ username, password }) => {
     return new Promise((resolve, reject) => {
-      if (username !== _admin.name && password !== _admin.password) {
+      if (username !== _admin.name || password !== _admin.password) {
         setTimeout(() => {
           reject('对不起，用户名密码错误，请重新输入。');
         }, 500);
       } else {
         setTimeout(() => {
-          user = _admin;
+          user.set(_admin);
           resolve();
         }, 500);
       }
     });
   }, []);
   return <Login onSubmit={submit} onSuccess={onSuccess} />;
+};
+
+const logout = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const success = true;
+      if (success) {
+        user.set(null);
+        resolve(true);
+      } else {
+        reject('对不起，退出失败。请重试。');
+      }
+    }, 500);
+  });
 };
 
 const routes = [
@@ -55,7 +82,13 @@ const routes = [
 
 const Demo = () => {
   return (
-    <App getUser={getUser} Login={LoginPage} routes={routes} menus={menus} />
+    <App
+      getUser={getUser}
+      Login={LoginPage}
+      logout={logout}
+      routes={routes}
+      menus={menus}
+    />
   );
 };
 

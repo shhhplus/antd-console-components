@@ -1,12 +1,10 @@
-interface Userinfo {
+export interface Userinfo {
   id: string | number;
   name: string;
   avatar: string;
 }
 
-export type User = Userinfo | null | undefined;
-
-export type GetUser = () => Promise<User>;
+export type GetUser = () => Promise<Userinfo | null | undefined>;
 
 export interface UseFetchResult {
   data: any;
@@ -15,5 +13,5 @@ export interface UseFetchResult {
 }
 
 export interface UseUserResult extends UseFetchResult {
-  data: User;
+  data: Userinfo | null | undefined;
 }

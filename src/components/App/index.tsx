@@ -9,6 +9,7 @@ import {
 import { Layout, Menu } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import Initializing from '../Initializing';
+import Account from './Account';
 import { GetUser } from '../types';
 import { useUser } from '../user';
 import styles from './index.module.scss';
@@ -22,6 +23,7 @@ interface LoginProps {
 interface Props {
   getUser: GetUser;
   Login: ComponentType<LoginProps>;
+  logout: () => Promise<void>;
   routes: Array<any>;
   menus: Array<any>;
 }
@@ -43,7 +45,7 @@ const Menus = ({ menus }: { menus: Array<any> }) => {
   );
 };
 
-export default ({ getUser, Login, routes, menus }: Props) => {
+export default ({ getUser, Login, logout, routes, menus }: Props) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
@@ -58,6 +60,11 @@ export default ({ getUser, Login, routes, menus }: Props) => {
   const user = useUser(getUser2use);
 
   const onLoginSuccess = useCallback(() => {
+    setInitialized(false);
+    user.fetch();
+  }, [user]);
+
+  const onLogoutSuccess = useCallback(() => {
     setInitialized(false);
     user.fetch();
   }, [user]);
@@ -102,6 +109,13 @@ export default ({ getUser, Login, routes, menus }: Props) => {
             <span className={styles['trigger']} onClick={toggle}>
               {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </span>
+            <div className={styles['header-right']}>
+              <Account
+                userinfo={user.data}
+                onLogoutSubmit={logout}
+                onLogoutSuccess={onLogoutSuccess}
+              />
+            </div>
           </Header>
           <Content className={styles['content']}>
             <Switch>
