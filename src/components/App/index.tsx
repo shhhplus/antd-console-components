@@ -10,8 +10,8 @@ import { Layout, Menu } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import Initializing from '../Initializing';
 import Account from './Account';
-import { GetUser } from '../types';
-import { useUser } from '../user';
+import { GetUser } from '../_types';
+import { useUser } from '../_user';
 import styles from './index.module.scss';
 
 const { Header, Content, Footer, Sider } = Layout;

@@ -5,7 +5,7 @@ import {
   SettingOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Userinfo } from '../../types';
+import { Userinfo } from '../../_types';
 import styles from './index.module.scss';
 
 interface Props {

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import { UseFetchResult } from '../types';
+import { UseFetchResult } from '../_types';
 
 export default (fn: () => Promise<any>): UseFetchResult => {
   const [data, setData] = useState<any>(null);
