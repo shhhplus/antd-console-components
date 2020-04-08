@@ -17,9 +17,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "outDir": ".outDir"
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    ".outDir"
   ]
 }
