@@ -11,8 +11,8 @@
 # production
 /build
 
-.build_entry.js
-/.build_package
+_index.js
+/.package
 
 # misc
 .DS_Store

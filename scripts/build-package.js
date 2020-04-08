@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-// const builtins = require('builtin-modules');
+const rimraf = require('rimraf');
 const { rollup } = require('rollup');
 const typescript = require('@rollup/plugin-typescript');
 const commonjs = require('@rollup/plugin-commonjs');
@@ -13,13 +13,16 @@ const postcss = require('rollup-plugin-postcss');
 const { uglify } = require('rollup-plugin-uglify');
 const cssUrl = require('postcss-url');
 
-const packageInfo = require('../package.json');
+const originalPackageInfo = require('../package.json');
 
+const entryFileName = '_index.js';
 const tsconfigPath = path.join(process.cwd(), 'tsconfig.json');
-console.log('tsconfigPath:', tsconfigPath);
+const tsconfig = require(tsconfigPath);
+// console.log('tsconfig:', tsconfig);
+// console.log('tsconfigPath:', tsconfigPath);
 const componentsPath = path.join(process.cwd(), 'src', 'components');
-const targetPath = path.join(process.cwd(), '.build_package');
-const entryFile = path.join(componentsPath, '.build_entry.js');
+const packageFolder = path.join(process.cwd(), '.package');
+const entryFile = path.join(componentsPath, entryFileName);
 // console.log('process.cwd():', process.cwd());
 // console.log('componentsPath:', componentsPath);
 
@@ -48,7 +51,7 @@ const createEntryFile = async () => {
     .map((dir) => {
       return `export { default as ${dir} } from './${dir}';`;
     })
-    .concat([`export const version = '${packageInfo.version}';`]);
+    .concat([`export const version = '${originalPackageInfo.version}';`]);
 
   fs.writeFileSync(entryFile, list.join('\r\n'));
 };
@@ -87,34 +90,77 @@ const createInputOptions = async () => {
         },
       }),
       typescript({
-        tsconfig: tsconfigPath,
+        tsconfig: false,
+        ...tsconfig.compilerOptions,
+        outDir: path.join(packageFolder, 'outDir'),
+        include: [componentsPath],
       }),
     ],
-    // external: Object.keys(packageInfo.dependencies),
-    external: [...Object.keys(packageInfo.dependencies), 'path'],
+    external: [...Object.keys(originalPackageInfo.dependencies), 'path'],
   };
 };
 
 const createOutputOptions = async () => {
   return {
-    file: path.join(targetPath, 'index.js'),
+    dir: packageFolder,
+    // file: path.join(packageFolder, 'index.js'),
+    name: originalPackageInfo.name,
     format: 'amd',
     sourcemap: true,
   };
 };
 
-const execute = async () => {
-  await removeEntryFile();
-  await createEntryFile();
+const removePackageFolder = async () => {
+  await new Promise((resolve, reject) => {
+    rimraf(packageFolder, (err) => {
+      err ? reject() : resolve();
+    });
+  });
+};
+
+const build = async () => {
   const inputOptions = await createInputOptions();
-  console.log('inputOptions:', inputOptions);
+  // console.log('inputOptions:', inputOptions);
   const outputOptions = await createOutputOptions();
   // console.log('outputOptions:', outputOptions);
   const bundle = await rollup(inputOptions);
-
-  return;
-
   await bundle.write(outputOptions);
 };
 
-execute();
+const createPackageDotJson = async () => {
+  const filePath = path.join(packageFolder, 'package.json');
+  const obj = [
+    'name',
+    'version',
+    'homepage',
+    'author',
+    'bugs',
+    'repository',
+    'dependencies',
+  ].reduce((acc, cur) => {
+    return {
+      ...acc,
+      [cur]: originalPackageInfo[cur],
+    };
+  }, {});
+  fs.writeFileSync(filePath, JSON.stringify(obj, null, 2));
+};
+
+const renamePackageFile = async () => {};
+
+const createReadme = async () => {
+  const src = path.join(process.cwd(), 'README.md');
+  const dest = path.join(packageFolder, 'README.md');
+  fs.copyFileSync(src, dest);
+};
+
+(async () => {
+  await removePackageFolder();
+  await removeEntryFile();
+  await createEntryFile();
+  await build();
+  await removeEntryFile();
+  await renamePackageFile();
+  await createPackageDotJson();
+  await createReadme();
+})();
