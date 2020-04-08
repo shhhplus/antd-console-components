@@ -17,7 +17,7 @@ npm install antd-console-components
 ## Usage
 
 ```jsx
-import React, { useCallback, Fragment } from 'react';
+import React, { useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import {
   BarChartOutlined,
@@ -26,7 +26,7 @@ import {
 } from '@ant-design/icons';
 import { App, Login, Page, Section } from 'antd-console-components';
 
-const Dashboard = () => {
+const DashboardPage = () => {
   return (
     <Page title="主面板">
       <Section title="我的待办" onFresh={() => {}}>
@@ -43,7 +43,7 @@ const Dashboard = () => {
   );
 };
 
-const Teacher = () => {
+const TeacherPage = () => {
   return (
     <Page title="老师管理">
       <Section title="语文老师" onFresh={() => {}}>
@@ -60,7 +60,7 @@ const Teacher = () => {
   );
 };
 
-const Student = () => {
+const StudentPage = () => {
   return (
     <Page title="学生管理">
       <Section title="高中学生" onFresh={() => {}}>
@@ -160,20 +160,20 @@ const logout = () => {
 const routes = [
   {
     path: '/',
-    component: Dashboard,
+    component: DashboardPage,
     exact: true,
   },
   {
     path: '/teacher',
-    component: Teacher,
+    component: TeacherPage,
   },
   {
     path: '/student',
-    component: Student,
+    component: StudentPage,
   },
 ];
 
-const Demo = () => {
+const DemoApp = () => {
   return (
     <App
       getUser={getUser}
@@ -185,5 +185,5 @@ const Demo = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<DemoApp />, document.getElementById('root'));
 ```
