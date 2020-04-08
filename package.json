@@ -2,12 +2,19 @@
   "name": "antd-console-components",
   "version": "1.0.0",
   "homepage": "https://github.com/shhhplus/antd-console-components",
+  "main": "index.js",
   "author": {
     "name": "shhhplus"
   },
   "bugs": {
     "url": "https://github.com/shhhplus/antd-console-components/issues"
   },
+  "keywords": [
+    "antd",
+    "console",
+    "admin",
+    "components"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/shhhplus/antd-console-components.git"

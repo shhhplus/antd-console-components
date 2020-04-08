@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install @shhhplus/antd-console-components
+npm install antd-console-components
 ```
 
 ## Doc
@@ -24,7 +24,7 @@ import {
   CloudOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { App, Login, Page, Section } from '@shhhplus/antd-console-components';
+import { App, Login, Page, Section } from 'antd-console-components';
 
 const Dashboard = () => {
   return (
