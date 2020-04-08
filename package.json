@@ -1,6 +1,6 @@
 {
   "name": "antd-console-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/shhhplus/antd-console-components",
   "main": "index.js",
   "author": {
@@ -9,6 +9,7 @@
   "bugs": {
     "url": "https://github.com/shhhplus/antd-console-components/issues"
   },
+  "license": "MIT",
   "keywords": [
     "antd",
     "console",
