@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { GetUser, UseUserResult } from '../types';
-import { useFetch } from '../hooks';
+import { GetUser, UseUserResult } from '../_types';
+import { useFetch } from '../_hooks';
 
 let _setGetUser: (gu: GetUser) => void;
 

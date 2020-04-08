@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react';
-import { UseUserResult } from '../types';
+import { UseUserResult } from '../_types';
 import useUser from './useUser';
 
 interface CompProps {

@@ -15,23 +15,13 @@
   "dependencies": {
     "@shhhplus/react-router-relative-link": "^0.1.6",
     "@shhhplus/timer.js": "0.0.2",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.34",
-    "@types/react": "^16.9.32",
-    "@types/react-dom": "^16.9.6",
-    "@types/react-router-dom": "^5.1.3",
     "antd": "^4.1.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "typescript": "^3.8.3"
+    "react-router-dom": "^5.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public -o docs"
+    "build:storybook": "build-storybook -s public -o docs",
+    "build:package": "node ./scripts/build-package.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -68,6 +59,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.9.0",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-json": "^4.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-typescript": "^4.0.0",
+    "@rollup/plugin-url": "^4.0.2",
     "@storybook/addon-actions": "^5.3.18",
     "@storybook/addon-console": "^1.2.1",
     "@storybook/addon-links": "^5.3.18",
@@ -77,14 +74,31 @@
     "@storybook/preset-create-react-app": "^2.1.1",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.18",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.34",
+    "@types/react": "^16.9.32",
+    "@types/react-dom": "^16.9.6",
+    "@types/react-router-dom": "^5.1.3",
     "css-loader": "^3.4.2",
     "fork-ts-checker-webpack-plugin": "^4.1.2",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.1",
     "node-sass": "^4.13.1",
+    "postcss-url": "^8.0.0",
     "prettier": "^2.0.2",
+    "react-scripts": "^3.4.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.3.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-postcss": "^2.5.0",
+    "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3",
-    "ts-loader": "^6.2.2"
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3"
   }
 }
