@@ -133,6 +133,8 @@ const createPackageDotJson = async () => {
     'name',
     'version',
     'homepage',
+    'main',
+    'keywords',
     'author',
     'bugs',
     'repository',
