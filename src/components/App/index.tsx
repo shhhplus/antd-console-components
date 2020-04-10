@@ -10,6 +10,7 @@ import { Layout, Menu } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import Initializing from '../Initializing';
 import Account from './Account';
+import RouteMenu from '../RouteMenu';
 import { GetUser } from '../_types';
 import { useUser } from '../_user';
 import styles from './index.module.scss';
@@ -27,23 +28,6 @@ interface Props {
   routes: Array<any>;
   menus: Array<any>;
 }
-
-const Menus = ({ menus }: { menus: Array<any> }) => {
-  return (
-    <Menu theme="dark" mode="inline">
-      {menus.map(({ icon, name, path }) => {
-        return (
-          <Menu.Item key={name}>
-            <Link to={path}>
-              {icon}
-              <span>{name}</span>
-            </Link>
-          </Menu.Item>
-        );
-      })}
-    </Menu>
-  );
-};
 
 export default ({ getUser, Login, logout, routes, menus }: Props) => {
   const [initialized, setInitialized] = useState<boolean>(false);
@@ -99,7 +83,7 @@ export default ({ getUser, Login, logout, routes, menus }: Props) => {
           }}
         >
           <div className={styles['logo']} />
-          <Menus menus={menus} />
+          <RouteMenu data={menus} />
         </Sider>
         <Layout
           className={styles['right']}

@@ -1,4 +1,10 @@
-import React, { Fragment, useEffect, useState, useCallback } from 'react';
+import React, {
+  Fragment,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import {
   Switch,
   Route,
@@ -9,72 +15,74 @@ import {
 import { matchPath } from 'react-router';
 import path from 'path';
 import Drawer from '../Drawer';
+import Back from '../Back';
 import styles from './index.module.scss';
 
 export default ({ children, routes, drawerWidth }) => {
-  const [routes2use, setRoutes2Use] = useState([]);
-  const [classname, setClassname] = useState('');
   const [width, setWidth] = useState(drawerWidth);
+  const [exitUrl, setExitUrl] = useState('');
   const { url } = useRouteMatch();
 
   const history = useHistory();
   const location = useLocation();
-  const matchedList = (routes || [])
-    .map((route) => {
-      return matchPath(location.pathname, {
-        ...route,
-        path: path.join(url, route.path),
-      });
-    })
-    .filter((route) => !!route);
-  const visible = matchedList.length > 0;
+
+  const pathname = useMemo(() => {
+    return location.pathname;
+  }, [location]);
+
+  const visible = useMemo(() => {
+    const matchedList = (routes || [])
+      .map((route) => {
+        return matchPath(pathname, {
+          ...route,
+          path: Array.isArray(route.path)
+            ? route.path.map((p) => path.join(url, p))
+            : path.join(url, route.path),
+        });
+      })
+      .filter((route) => !!route);
+    return matchedList.length > 0;
+  }, [routes, pathname, url]);
+
+  useEffect(() => {
+    if (!visible) {
+      setExitUrl(pathname);
+    }
+  }, [pathname, visible]);
 
   const exit = useCallback(() => {
-    history.replace(url);
-  }, [history, url]);
-
-  // 抽屉的width变化时，有过度效果
-  // 直接覆盖样式会导致抽屉首次打开时动画效果错误，所以在抽屉打开以后再加
-  useEffect(() => {
-    if (visible) {
-      const timer = setTimeout(() => setClassname(styles['drawer']), 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [visible]);
+    history.replace(exitUrl);
+  }, [history, exitUrl]);
 
   useEffect(() => {
     console.log('[DrawerEntryPage] mounted');
   }, []);
 
-  useEffect(() => {
+  const routes2use = useMemo(() => {
     console.log('[DrawerEntryPage] routes changed');
-    setRoutes2Use(
-      (routes || []).map((route) => {
-        const OriginalComponent = route.component;
-        const WrappedComp = (props) => {
-          useEffect(() => {
-            console.log('[DrawerEntryPage] subpage onMounted:', route);
-            setWidth(route.width || drawerWidth);
-          }, []);
-          return <OriginalComponent {...props} exit={exit} />;
-        };
-        return {
-          path: path.join(url, route.path),
-          component: WrappedComp,
-        };
-      }),
-    );
+    return (routes || []).map((route) => {
+      const OriginalComponent = route.component;
+      const WrappedComp = (props) => {
+        useEffect(() => {
+          console.log('[DrawerEntryPage] subpage onMounted:', route);
+          setWidth(route.width || drawerWidth);
+        }, []);
+        return <OriginalComponent {...props} exit={exit} />;
+      };
+
+      return {
+        path: Array.isArray(route.path)
+          ? route.path.map((p) => path.join(url, p))
+          : path.join(url, route.path),
+        component: WrappedComp,
+      };
+    });
   }, [routes, drawerWidth, exit, url]);
 
   return (
     <Fragment>
       {children}
-      <Drawer
-        className={classname}
-        visible={visible}
-        width={visible ? width : 0}
-        onClose={exit}
-      >
+      <Drawer visible={visible} width={visible ? width : 0} onClose={exit}>
         <Switch>
           {routes2use.map((route, idx) => {
             return (

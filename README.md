@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install antd-console-components
+npm install antd-console-components --save
 ```
 
 ## Doc

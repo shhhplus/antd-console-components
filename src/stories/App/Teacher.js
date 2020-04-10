@@ -17,7 +17,7 @@ const search = ({ values, pagination, filters, sorter, extra }) => {
           const number = 100 * (pagination.current - 1) + idx;
           return {
             id: number,
-            name: `员工-${number}`,
+            name: `老师-${number}`,
             cellphone: (13800138000 + idx).toString(),
             address: `闸北区大宁灵石公园${number}号`,
           };
@@ -35,7 +35,7 @@ const Create = ({ exit }) => {
     return <div style={{ width: '80px' }}>{children}</div>;
   };
   return (
-    <Page title="新增员工">
+    <Page title="新增老师">
       <Form form={form}>
         <Form.Item label={<Label>姓名</Label>} name="username" rules={[]}>
           <Input />
@@ -89,7 +89,7 @@ export default () => {
   return (
     <DrawerEntryPage routes={routes}>
       <Page
-        title="员工管理"
+        title="老师管理"
         onFresh={() => {
           instanceRef.current.search();
         }}

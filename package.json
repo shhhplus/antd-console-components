@@ -1,6 +1,6 @@
 {
   "name": "antd-console-components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/shhhplus/antd-console-components",
   "main": "index.js",
   "author": {
@@ -21,11 +21,10 @@
     "url": "https://github.com/shhhplus/antd-console-components.git"
   },
   "dependencies": {
-    "@shhhplus/react-router-relative-link": "^0.1.6",
+    "@shhhplus/react-router-relative-link": "^0.1.7",
     "@shhhplus/timer.js": "0.0.2",
     "antd": "^4.1.0",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

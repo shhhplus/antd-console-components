@@ -1,7 +1,6 @@
 import React, { FC, ReactNode, useCallback, useState } from 'react';
-import { Card, Form, Input, Button, message } from 'antd';
+import { Space, Card, Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import Actions from '../Actions';
 import styles from './index.module.scss';
 
 export interface LoginProps {
@@ -73,14 +72,14 @@ const Login: FC<LoginProps> = ({
             </Form.Item>
           </Form>
           <div className={styles.actions}>
-            <Actions>
+            <Space>
               <Button type="primary" loading={processing} onClick={submit}>
                 确定
               </Button>
               <Button htmlType="button" loading={processing} onClick={reset}>
                 清空重填
               </Button>
-            </Actions>
+            </Space>
           </div>
         </Card>
       </div>

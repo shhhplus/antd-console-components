@@ -1,11 +1,10 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Space, Button } from 'antd';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
 import { FundOutlined } from '@ant-design/icons';
 import Section from '../components/Section';
-import Actions from '../components/Actions';
 
 const Demo = ({ children }) => {
   return <div style={{ padding: '20px' }}>{children}</div>;
@@ -43,11 +42,11 @@ storiesOf('Section', module)
   })
   .add('带操作按钮', () => {
     const extra = (
-      <Actions spacing={12}>
+      <Space size={12}>
         <Button>重启</Button>
         <Button type="primary">删除</Button>
         <Button type="primary">编辑标签</Button>
-      </Actions>
+      </Space>
     );
     return (
       <Demo>

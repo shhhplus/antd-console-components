@@ -2,10 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
-import { Button, Anchor } from 'antd';
+import { Space, Button, Anchor } from 'antd';
 import Page from '../components/Page';
 import Section from '../components/Section';
-import Actions from '../components/Actions';
 import Spreader from '../components/Spreader';
 
 const { Link } = Anchor;
@@ -56,11 +55,11 @@ storiesOf('Page', module)
   })
   .add('带操作按钮', () => {
     const extra = (
-      <Actions spacing={12}>
+      <Space size={12}>
         <Button>重启</Button>
         <Button type="primary">删除</Button>
         <Button type="primary">编辑标签</Button>
-      </Actions>
+      </Space>
     );
     return (
       <Demo>

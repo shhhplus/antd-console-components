@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs,   } from '@storybook/addon-knobs/react';
-import { Button } from 'antd';
+import { Space, Button } from 'antd';
 import Page from '../components/Page';
-import Actions from '../components/Actions';
 import Drawer from '../components/Drawer';
 
 const Demo = ({ children }) => {
@@ -20,9 +19,9 @@ const StandardDemo = (porps) => {
 
   return (
     <Demo>
-      <Actions>
+      <Space>
         <Button onClick={() => setVisible(true)}>打开抽屉</Button>
-      </Actions>
+      </Space>
       <Drawer visible={visible} onClose={() => setVisible(false)}>
         <Page title="详情">
           <div style={{ lineHeight: '300px' }}>this is content.</div>
