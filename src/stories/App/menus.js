@@ -18,35 +18,49 @@ export default [
   },
   {
     icon: <AppstoreOutlined />,
-    name: '员工管理',
-    path: '/staff',
-  },
-  {
-    icon: <BarChartOutlined />,
-    name: '老师管理',
-  },
-  {
-    icon: <CloudOutlined />,
-    name: '用户管理',
+    name: '人员管理',
+    path: '/person',
+    children: [
+      {
+        icon: <AppstoreOutlined />,
+        name: '员工管理',
+        path: '/staff',
+      },
+      {
+        icon: <BarChartOutlined />,
+        name: '老师管理',
+        path: '/teacher',
+      },
+      {
+        icon: <CloudOutlined />,
+        name: '用户管理',
+        path: '/student',
+      },
+    ],
   },
   {
     icon: <ShopOutlined />,
     name: '科目管理',
+    path: '/subject',
   },
   {
     icon: <TeamOutlined />,
     name: '课程管理',
+    path: '/course',
   },
   {
     icon: <UploadOutlined />,
     name: '报名管理',
+    path: '/join',
   },
   {
     icon: <VideoCameraOutlined />,
     name: '财务统计',
+    path: '/finance',
   },
   {
     icon: <ShopOutlined />,
     name: '系统设置',
+    path: '/setting',
   },
 ];

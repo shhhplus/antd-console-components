@@ -2,9 +2,11 @@ import React, { useCallback, Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 import App from '../../components/App';
 import Login from '../../components/Login';
+import menus from './menus';
 import Dashboard from './Dashboard';
 import Staff from './Staff';
-import menus from './menus';
+import Teacher from './Teacher';
+import Student from './Student';
 
 const _admin = {
   id: 1,
@@ -75,8 +77,16 @@ const routes = [
     exact: true,
   },
   {
-    path: '/staff',
+    path: '/person/staff',
     component: Staff,
+  },
+  {
+    path: '/person/teacher',
+    component: Teacher,
+  },
+  {
+    path: '/person/student',
+    component: Student,
   },
 ];
 
