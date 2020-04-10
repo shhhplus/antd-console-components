@@ -4,9 +4,8 @@ import { Link as RelativeLink } from '@shhhplus/react-router-relative-link';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
-import { Button, Card } from 'antd';
+import { Space, Button, Card } from 'antd';
 import Page from '../components/Page';
-import Actions from '../components/Actions';
 import DrawerEntryPage from '../components/DrawerEntryPage';
 import RouteTabs from '../components/RouteTabs';
 
@@ -100,14 +99,14 @@ const StandardDemo = (porps) => {
                 margin: '0 0 20px 0',
               }}
             >
-              <Actions>
+              <Space>
                 <RelativeLink to={`friend`}>
                   <Button type="primary">我的好友</Button>
                 </RelativeLink>
                 <RelativeLink to={`photo`}>
                   <Button type="primary">我的照片</Button>
                 </RelativeLink>
-              </Actions>
+              </Space>
             </div>
             <div>this is content.</div>
             <div>this is content.</div>
@@ -182,11 +181,11 @@ const DynamicDemo = (porps) => {
                 margin: '0 0 20px 0',
               }}
             >
-              <Actions>
+              <Space>
                 <RelativeLink to={`create`} dynamic={true}>
                   <Button type="primary">新增</Button>
                 </RelativeLink>
-              </Actions>
+              </Space>
             </div>
             <div>this is content.</div>
             <div>this is content.</div>

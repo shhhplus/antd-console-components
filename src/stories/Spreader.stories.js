@@ -2,9 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
-import { Button } from 'antd';
+import { Space, Button } from 'antd';
 import Spreader from '../components/Spreader';
-import Actions from '../components/Actions';
 
 const Wrapper = ({ children }) => {
   return (
@@ -35,11 +34,11 @@ storiesOf('Spreader', module)
   })
   .add('带操作按钮', () => {
     const extra = (
-      <Actions spacing={12}>
+      <Space size={12}>
         <Button>重启</Button>
         <Button type="primary">删除</Button>
         <Button type="primary">编辑标签</Button>
-      </Actions>
+      </Space>
     );
     return (
       <Wrapper>
