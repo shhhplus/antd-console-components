@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
@@ -52,10 +52,11 @@ storiesOf('Spreader', module)
       </Wrapper>
     );
   })
-  .add('控制展开', () => {
+  .add('展开受控', () => {
+    const [opened, setOpened] = useState(false);
     return (
       <Wrapper>
-        <Spreader title="基本信息" opened={false}>
+        <Spreader title="基本信息" opened={opened} onOpenedChange={setOpened}>
           <div>this is content</div>
           <div>this is content</div>
           <div>this is content</div>

@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classNames from 'classnames/bind';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default ({ opened = true, title, children, extra }) => {
+export default ({ opened = true, title, children, extra, onOpenedChange }) => {
   const [oped, setOped] = useState();
+
+  const onChange = useCallback(() => {
+    const newVal = !oped;
+    if (onOpenedChange) {
+      onOpenedChange(newVal);
+    } else {
+      setOped(newVal);
+    }
+  }, [oped, onOpenedChange]);
 
   useEffect(() => {
     setOped(opened);
@@ -19,7 +28,7 @@ export default ({ opened = true, title, children, extra }) => {
       })}
     >
       <div className={styles['header']}>
-        <div className={styles['title']} onClick={() => setOped(!oped)}>
+        <div className={styles['title']} onClick={onChange}>
           {title}
           {oped ? (
             <CaretUpOutlined className={styles['icon']} />
