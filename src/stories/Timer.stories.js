@@ -1,11 +1,16 @@
 import React, { useState, useCallback, useRef } from 'react';
+import { Card } from 'antd';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
 import Timer from '../components/Timer';
 
 const Demo = ({ children }) => {
-  return <div style={{ width: '500px', margin: '100px auto' }}>{children}</div>;
+  return (
+    <div style={{ width: '500px', margin: '100px auto' }}>
+      <Card>{children}</Card>
+    </div>
+  );
 };
 
 const SyncTask = () => {
