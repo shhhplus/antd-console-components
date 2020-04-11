@@ -1,5 +1,10 @@
 import React, { useMemo } from 'react';
 import { HashRouter as Router, Link } from 'react-router-dom';
+import {
+  AppstoreOutlined,
+  BarChartOutlined,
+  CloudOutlined,
+} from '@ant-design/icons';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
@@ -14,58 +19,61 @@ const StandardDemo = () => {
   const data = useMemo(
     () => [
       {
-        title: '欧洲',
+        icon: <AppstoreOutlined />,
+        name: '欧洲',
         path: '/europe',
       },
       {
-        title: '亚洲',
+        icon: <BarChartOutlined />,
+        name: '亚洲',
         path: '/asia',
         type: 'sub',
         children: [
           {
-            title: '中国',
+            name: '中国',
             path: '/china',
             type: 'sub',
             children: [
               {
-                title: '上海',
+                name: '上海',
                 path: '/shanghai',
               },
               {
-                title: '北京',
+                name: '北京',
                 path: '/beijing',
               },
               {
-                title: '江苏',
+                name: '江苏',
                 path: '/jiangsu',
               },
               {
-                title: '浙江',
+                name: '浙江',
                 path: '/zhejiang',
               },
             ],
           },
           {
-            title: '日本',
+            name: '日本',
             path: '/japan',
           },
         ],
       },
       {
-        title: '非洲',
+        icon: <CloudOutlined />,
+        name: '非洲',
         path: '/africa',
         type: 'sub',
         children: [
           {
-            title: '尼日利亚',
+            name: '尼日利亚',
             path: '/nigeria',
           },
           {
-            title: '摩洛哥',
+            name: '摩洛哥',
             path: '/morocco',
           },
           {
-            title: '安哥拉',
+            name: '安哥拉',
             path: '/angola',
           },
         ],
