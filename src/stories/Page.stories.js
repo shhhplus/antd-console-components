@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
-import { Space, Button, Anchor } from 'antd';
+import { Space, Button, Anchor, Card } from 'antd';
 import Page from '../components/Page';
 import Section from '../components/Section';
 import Spreader from '../components/Spreader';
@@ -19,9 +19,11 @@ storiesOf('Page', module)
     return (
       <Demo>
         <Page title="我的服务">
-          <div>这里是页面内容</div>
-          <div>这里是页面内容</div>
-          <div>这里是页面内容</div>
+          <Card>
+            <div>这里是页面内容</div>
+            <div>这里是页面内容</div>
+            <div>这里是页面内容</div>
+          </Card>
         </Page>
       </Demo>
     );
@@ -35,9 +37,11 @@ storiesOf('Page', module)
             action('clicked');
           }}
         >
-          <div>这里是页面内容</div>
-          <div>这里是页面内容</div>
-          <div>这里是页面内容</div>
+          <Card>
+            <div>这里是页面内容</div>
+            <div>这里是页面内容</div>
+            <div>这里是页面内容</div>
+          </Card>
         </Page>
       </Demo>
     );
@@ -46,9 +50,11 @@ storiesOf('Page', module)
     return (
       <Demo>
         <Page title="我的服务" onBack={() => {}}>
-          <div>这里是页面内容</div>
-          <div>这里是页面内容</div>
-          <div>这里是页面内容</div>
+          <Card>
+            <div>这里是页面内容</div>
+            <div>这里是页面内容</div>
+            <div>这里是页面内容</div>
+          </Card>
         </Page>
       </Demo>
     );
@@ -64,9 +70,11 @@ storiesOf('Page', module)
     return (
       <Demo>
         <Page title="我的服务" extra={extra}>
-          <div>这里是页面内容</div>
-          <div>这里是页面内容</div>
-          <div>这里是页面内容</div>
+          <Card>
+            <div>这里是页面内容</div>
+            <div>这里是页面内容</div>
+            <div>这里是页面内容</div>
+          </Card>
         </Page>
       </Demo>
     );

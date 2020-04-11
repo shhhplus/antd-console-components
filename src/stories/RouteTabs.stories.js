@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Card } from 'antd';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
@@ -76,9 +76,9 @@ storiesOf('RouteTabs', module)
         </div>
         <Switch>
           <Route path={parentPath}>
-            <div>
+            <Card>
               <RouteTabs tabs={tabs} />
-            </div>
+            </Card>
           </Route>
         </Switch>
       </Router>
