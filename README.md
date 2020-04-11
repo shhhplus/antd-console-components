@@ -1,20 +1,20 @@
-# antd-console-components
+基于 react 16.x、antd 4.x、react-router-dom 5.x 封装的控制台组件库。
 
-## Introduction
+# Introduction
 
-基于 react 16.x、antd 4.x、react-router-dom 5.x 封装的控制台组件库。[使用文档](https://shhhplus.github.io/antd-console-components/)。
+对控制台类型网站的通用组件做了封装，通过简单的配置就能搭建一个完整的 App，随后开发单个页面即可。[查看 Demo](https://shhhplus.github.io/antd-console-components/)。
 
-## Install
+# Install
 
 ```bash
 npm install antd-console-components --save
 ```
 
-## Doc
+# Doc
 
 [点击链接](https://shhhplus.github.io/antd-console-components/)，查看使用文档。
 
-## Usage
+# Usage
 
 ```jsx
 import React, { useCallback } from 'react';
