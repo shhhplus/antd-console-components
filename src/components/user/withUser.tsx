@@ -7,7 +7,7 @@ interface CompProps {
 }
 
 export default (Comp: ComponentType<CompProps>) => {
-  const user = useUser(undefined);
+  const user = useUser();
 
   if (!user.data) {
     return null;

@@ -1,7 +1,14 @@
 import React, { useCallback, Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
+import {
+  LogoutOutlined,
+  SettingOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import { Menu } from 'antd';
 import App from '../../components/App';
 import Login from '../../components/Login';
+import { Account } from '../../components/headers';
 import menus from './menus';
 import Dashboard from './Dashboard';
 import Staff from './Staff';
@@ -93,11 +100,27 @@ const routes = [
 const Demo = () => {
   return (
     <App
-      getUser={getUser}
       Login={LoginPage}
+      getUser={getUser}
       logout={logout}
       routes={routes}
       menus={menus}
+      headers={
+        <Fragment>
+          <Account onLogoutSubmit={logout}></Account>
+          <Account onLogoutSubmit={logout}>
+            <Menu.Item key="uc">
+              <UserOutlined />
+              个人中心
+            </Menu.Item>
+            <Menu.Item key="settings">
+              <SettingOutlined />
+              个人设置
+            </Menu.Item>
+            <Menu.Divider />
+          </Account>
+        </Fragment>
+      }
     />
   );
 };
