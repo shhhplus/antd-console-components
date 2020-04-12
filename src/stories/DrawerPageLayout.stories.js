@@ -3,7 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
 import { Space, Button, Anchor, Card } from 'antd';
-import Page from '../components/Page';
+import Drawer from '../components/Drawer';
+import DrawerPageLayout from '../components/DrawerPageLayout';
 import Section from '../components/Section';
 import Spreader from '../components/Spreader';
 
@@ -13,25 +14,25 @@ const Demo = ({ children }) => {
   return <div style={{ padding: '20px' }}>{children}</div>;
 };
 
-storiesOf('Page', module)
+storiesOf('DrawerPageLayout', module)
   // .addDecorator(withKnobs)
   .add('标准', () => {
     return (
-      <Demo>
-        <Page title="我的服务">
+      <Drawer visible={true}>
+        <DrawerPageLayout title="我的服务">
           <Card>
             <div>这里是页面内容</div>
             <div>这里是页面内容</div>
             <div>这里是页面内容</div>
           </Card>
-        </Page>
-      </Demo>
+        </DrawerPageLayout>
+      </Drawer>
     );
   })
   .add('带刷新', () => {
     return (
-      <Demo>
-        <Page
+      <Drawer visible={true}>
+        <DrawerPageLayout
           title="我的服务"
           onFresh={() => {
             action('clicked');
@@ -42,21 +43,21 @@ storiesOf('Page', module)
             <div>这里是页面内容</div>
             <div>这里是页面内容</div>
           </Card>
-        </Page>
-      </Demo>
+        </DrawerPageLayout>
+      </Drawer>
     );
   })
   .add('带返回', () => {
     return (
-      <Demo>
-        <Page title="我的服务" onBack={() => {}}>
+      <Drawer visible={true}>
+        <DrawerPageLayout title="我的服务" onBack={() => {}}>
           <Card>
             <div>这里是页面内容</div>
             <div>这里是页面内容</div>
             <div>这里是页面内容</div>
           </Card>
-        </Page>
-      </Demo>
+        </DrawerPageLayout>
+      </Drawer>
     );
   })
   .add('带操作按钮', () => {
@@ -68,22 +69,26 @@ storiesOf('Page', module)
       </Space>
     );
     return (
-      <Demo>
-        <Page title="我的服务" extra={extra}>
+      <Drawer visible={true}>
+        <DrawerPageLayout title="我的服务" extra={extra}>
           <Card>
             <div>这里是页面内容</div>
             <div>这里是页面内容</div>
             <div>这里是页面内容</div>
           </Card>
-        </Page>
-      </Demo>
+        </DrawerPageLayout>
+      </Drawer>
     );
   })
   .add('撑满容器', () => {
     return (
-      <Demo>
+      <Drawer visible={true}>
         <div style={{ height: '402px', border: '1px solid green' }}>
-          <Page title="这里是标题" onBack={() => {}} fullfilled={true}>
+          <DrawerPageLayout
+            title="这里是标题"
+            onBack={() => {}}
+            fullfilled={true}
+          >
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
               return (
                 <div
@@ -97,9 +102,9 @@ storiesOf('Page', module)
                 </div>
               );
             })}
-          </Page>
+          </DrawerPageLayout>
         </div>
-      </Demo>
+      </Drawer>
     );
   })
   .add('带页面内定位', () => {
@@ -123,8 +128,8 @@ storiesOf('Page', module)
     const content = <div style={{ background: '#F6F9FC', height: '120px' }} />;
 
     return (
-      <Demo>
-        <Page title="我的服务" anchor={anchor}>
+      <Drawer visible={true}>
+        <DrawerPageLayout title="我的服务" anchor={anchor}>
           <div style={{ marginBottom: '40px' }}>
             <Spreader title="基本信息">
               <div>这里是基本信息</div>
@@ -154,7 +159,7 @@ storiesOf('Page', module)
             {content}
             {content}
           </Section>
-        </Page>
-      </Demo>
+        </DrawerPageLayout>
+      </Drawer>
     );
   });

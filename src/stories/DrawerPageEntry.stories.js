@@ -4,9 +4,10 @@ import { Link as RelativeLink } from '@shhhplus/react-router-relative-link';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs } from '@storybook/addon-knobs/react';
-import { Space, Button, Card } from 'antd';
-import Page from '../components/Page';
-import DrawerEntryPage from '../components/DrawerEntryPage';
+import { PageHeader, Space, Button, Card } from 'antd';
+import PageLayout from '../components/PageLayout';
+import DrawerPageLayout from '../components/DrawerPageLayout';
+import DrawerPageEntry from '../components/DrawerPageEntry';
 import RouteTabs from '../components/RouteTabs';
 
 const parentPath = '/parent';
@@ -31,7 +32,7 @@ const App = ({ children }) => {
 
 const Friend = ({ exit }) => {
   return (
-    <Page title="我的好友">
+    <DrawerPageLayout title="我的好友">
       <RelativeLink to={`../photo`}>
         <Button type="primary">我的照片</Button>
       </RelativeLink>
@@ -39,13 +40,13 @@ const Friend = ({ exit }) => {
       <Button type="primary" onClick={exit}>
         完成
       </Button>
-    </Page>
+    </DrawerPageLayout>
   );
 };
 
 const Photo = ({ exit }) => {
   return (
-    <Page title="我的照片">
+    <DrawerPageLayout title="我的照片">
       <RelativeLink to={`../friend`}>
         <Button type="primary">我的好友</Button>
       </RelativeLink>
@@ -53,7 +54,7 @@ const Photo = ({ exit }) => {
       <Button type="primary" onClick={exit}>
         完成
       </Button>
-    </Page>
+    </DrawerPageLayout>
   );
 };
 
@@ -86,8 +87,8 @@ const StandardDemo = (porps) => {
 
   return (
     <App>
-      <DrawerEntryPage routes={routes} drawerWidth="1190px">
-        <Page title="标准">
+      <DrawerPageEntry routes={routes} drawerWidth="1190px">
+        <PageLayout header={<PageHeader title="标准" />}>
           <Card>
             <div style={{ margin: '0 0 20px 0' }}>
               模拟页面setState触发render。当前时间戳: {now}
@@ -114,8 +115,8 @@ const StandardDemo = (porps) => {
             <div>this is content.</div>
             <div>this is content.</div>
           </Card>
-        </Page>
-      </DrawerEntryPage>
+        </PageLayout>
+      </DrawerPageEntry>
     </App>
   );
 };
@@ -157,7 +158,7 @@ const DynamicDemo = (porps) => {
       {
         path: ['/create', ...list],
         component: () => {
-          return <Page title="新增"></Page>;
+          return <DrawerPageLayout title="新增"></DrawerPageLayout>;
         },
         width: '900px',
       },
@@ -168,8 +169,8 @@ const DynamicDemo = (porps) => {
 
   return (
     <App>
-      <DrawerEntryPage routes={routes} drawerWidth="1190px">
-        <Page title="动态">
+      <DrawerPageEntry routes={routes} drawerWidth="1190px">
+        <PageLayout header={<PageHeader title="动态" />}>
           <Card>
             <div style={{ margin: '0 0 20px 0' }}>
               模拟页面setState触发render。当前时间戳: {now}
@@ -192,13 +193,13 @@ const DynamicDemo = (porps) => {
             <div>this is content.</div>
             <RouteTabs tabs={tabs} />
           </Card>
-        </Page>
-      </DrawerEntryPage>
+        </PageLayout>
+      </DrawerPageEntry>
     </App>
   );
 };
 
-storiesOf('DrawerEntryPage', module)
+storiesOf('DrawerPageEntry', module)
   // .addDecorator(withKnobs)
   .add('标准', StandardDemo)
   .add('动态', DynamicDemo);

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Row, Col } from 'antd';
-import Page from '../../components/Page';
+import { Row, Col, PageHeader } from 'antd';
+import PageLayout from '../../components/PageLayout';
 import FieldInfo from '../../components/FieldInfo';
 import Section from '../../components/Section';
 import Spreader from '../../components/Spreader';
@@ -10,7 +10,7 @@ const marginBottom = 10;
 
 export default () => {
   return (
-    <Page title="主面板">
+    <PageLayout header={<PageHeader title="主面板" />}>
       <div style={{ marginBottom: '20px' }}>
         <Spreader title="基本信息">
           <Row style={{ marginBottom }}>
@@ -87,6 +87,6 @@ export default () => {
         <div style={{ padding: '0 0 60px 0' }}>notification 2</div>
         <div style={{ padding: '0 0 60px 0' }}>notification 3</div>
       </Section>
-    </Page>
+    </PageLayout>
   );
 };

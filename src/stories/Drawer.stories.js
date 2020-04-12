@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // import { withKnobs,   } from '@storybook/addon-knobs/react';
 import { Space, Button } from 'antd';
-import Page from '../components/Page';
+import DrawerPageLayout from '../components/DrawerPageLayout';
 import Drawer from '../components/Drawer';
 
 const Demo = ({ children }) => {
@@ -23,11 +23,11 @@ const StandardDemo = (porps) => {
         <Button onClick={() => setVisible(true)}>打开抽屉</Button>
       </Space>
       <Drawer visible={visible} onClose={() => setVisible(false)}>
-        <Page title="详情">
+        <DrawerPageLayout title="详情">
           <div style={{ lineHeight: '300px' }}>this is content.</div>
           <div style={{ lineHeight: '300px' }}>this is content.</div>
           <div style={{ lineHeight: '300px' }}>this is content.</div>
-        </Page>
+        </DrawerPageLayout>
       </Drawer>
     </Demo>
   );
