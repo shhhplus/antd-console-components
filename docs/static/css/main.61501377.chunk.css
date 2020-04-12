@@ -14,7 +14,7 @@
 
 .Spreader_spreader__1LegN{background:#ffffff;border-radius:4px;padding:20px 24px}.Spreader_spreader__1LegN.Spreader_closed__3AsYk .Spreader_content__2dUr8{height:0;margin-top:0}.Spreader_header__3p_oS{display:flex;justify-content:space-between}.Spreader_title__2QiJu{font-size:16px;font-weight:500;color:#343434;line-height:32px;cursor:pointer}.Spreader_title__2QiJu .Spreader_icon__PzI4A{margin-left:20px}.Spreader_content__2dUr8{margin-top:20px;overflow:hidden}
 
-.DrawerPageLayout_page__3yJhX{height:100%;display:flex;flex-direction:column}.DrawerPageLayout_header__2dyF5{border-bottom:1px solid #f0f0f0}.DrawerPageLayout_body__2Gjpl{flex-grow:1;overflow:auto;padding:16px 24px}.DrawerPageLayout_footer__17fSw{overflow:auto}.DrawerPageLayout_fresh__3UXUL{margin-left:16px;display:inline-block;line-height:16px}.DrawerPageLayout_fresh__3UXUL .DrawerPageLayout_icon__3AnDc{font-size:16px;vertical-align:baseline;cursor:pointer}
+.DrawerPageLayout_page__3yJhX{height:100%;display:flex;flex-direction:column}.DrawerPageLayout_header__2dyF5{border-bottom:1px solid #f0f0f0}.DrawerPageLayout_body__2Gjpl{flex-grow:1;overflow:auto;padding:16px 24px}.DrawerPageLayout_footer__17fSw{border-top:1px solid #f0f0f0;padding:10px 24px}.DrawerPageLayout_fresh__3UXUL{margin-left:16px;display:inline-block;line-height:16px}.DrawerPageLayout_fresh__3UXUL .DrawerPageLayout_icon__3AnDc{font-size:16px;vertical-align:baseline;cursor:pointer}
 
 .Drawer_drawer__27sUG .ant-drawer-close{left:-32px}.Drawer_drawer__27sUG .ant-drawer-close .anticon-close{margin-left:-12px;font-size:14px;vertical-align:0}.Drawer_drawer__27sUG .ant-drawer-close:before{position:absolute;content:'';height:54px;width:54px;background:url(../../static/media/icon-react.45b9df5e.svg) no-repeat;background-position:-10px;background-size:100%;top:0;left:0;z-index:-1}.Drawer_drawer__27sUG .ant-drawer-close:hover .anticon-close{color:#1890ff}.Drawer_drawer__27sUG .ant-drawer-content{overflow:visible}.Drawer_drawer__27sUG .ant-drawer-wrapper-body{display:flex;flex-direction:column;overflow:auto;height:100%}.Drawer_drawer__27sUG .ant-drawer-body{padding:0 !important;height:100%;overflow:auto}
 
@@ -29,4 +29,4 @@
 .Ellipsis_ellipsis__RQ91D{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 
-/*# sourceMappingURL=main.c611c4c0.chunk.css.map*/
+/*# sourceMappingURL=main.61501377.chunk.css.map*/
