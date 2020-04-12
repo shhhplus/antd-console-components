@@ -10,6 +10,7 @@ export interface UseFetchResult {
   data: any;
   fetching: boolean;
   fetch: () => void;
+  reset: () => void;
 }
 
 export interface UseUserResult extends UseFetchResult {

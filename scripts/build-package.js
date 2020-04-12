@@ -149,7 +149,34 @@ const createPackageDotJson = async () => {
   fs.writeFileSync(filePath, JSON.stringify(obj, null, 2));
 };
 
-const renamePackageFile = async () => {};
+const renamePackageFile = async () => {
+  const files = fs.readdirSync(packageFolder);
+  const name = path.basename(entryFile, '.js');
+  const toRenameTasks = files
+    .map((file) => {
+      const filePath = path.join(packageFolder, file);
+      const stat = fs.statSync(filePath);
+      if (!stat.isFile()) {
+        return null;
+      }
+
+      const basename = path.basename(filePath);
+      const [first, ...rest] = basename.split('.');
+      return first === name
+        ? {
+            oldPath: filePath,
+            newPath: path.join(packageFolder, ['index', ...rest].join('.')),
+          }
+        : null;
+    })
+    .filter((item) => item);
+
+  // console.log('toRenameTasks:', toRenameTasks);
+
+  for (let task of toRenameTasks) {
+    fs.renameSync(task.oldPath, task.newPath);
+  }
+};
 
 const createReadme = async () => {
   const src = path.join(process.cwd(), 'README.md');
