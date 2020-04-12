@@ -33,7 +33,7 @@ export default ({
         className={styles['header']}
       />
       <div className={styles['body']}>{children}</div>
-      <div className={styles['footer']}>{footer}</div>
+      {footer && <div className={styles['footer']}>{footer}</div>}
     </div>
   );
 };

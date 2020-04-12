@@ -12,17 +12,16 @@ const Demo = ({ children }) => {
   return <div style={{ padding: '20px' }}>{children}</div>;
 };
 
+const content = <div style={{ background: '#F6F9FC', height: '120px' }}></div>;
+
 storiesOf('DrawerPageLayout', module)
   // .addDecorator(withKnobs)
   .add('标准', () => {
     return (
       <Drawer visible={true}>
         <DrawerPageLayout title="我的服务">
-          <Card>
-            <div>这里是页面内容</div>
-            <div>这里是页面内容</div>
-            <div>这里是页面内容</div>
-          </Card>
+          {content}
+          {content}
         </DrawerPageLayout>
       </Drawer>
     );
@@ -36,11 +35,8 @@ storiesOf('DrawerPageLayout', module)
             action('clicked');
           }}
         >
-          <Card>
-            <div>这里是页面内容</div>
-            <div>这里是页面内容</div>
-            <div>这里是页面内容</div>
-          </Card>
+          {content}
+          {content}
         </DrawerPageLayout>
       </Drawer>
     );
@@ -49,11 +45,8 @@ storiesOf('DrawerPageLayout', module)
     return (
       <Drawer visible={true}>
         <DrawerPageLayout title="我的服务" onBack={() => {}}>
-          <Card>
-            <div>这里是页面内容</div>
-            <div>这里是页面内容</div>
-            <div>这里是页面内容</div>
-          </Card>
+          {content}
+          {content}
         </DrawerPageLayout>
       </Drawer>
     );
@@ -69,11 +62,8 @@ storiesOf('DrawerPageLayout', module)
     return (
       <Drawer visible={true}>
         <DrawerPageLayout title="我的服务" extra={extra}>
-          <Card>
-            <div>这里是页面内容</div>
-            <div>这里是页面内容</div>
-            <div>这里是页面内容</div>
-          </Card>
+          {content}
+          {content}
         </DrawerPageLayout>
       </Drawer>
     );
@@ -84,40 +74,37 @@ storiesOf('DrawerPageLayout', module)
       console.log('onChange', link);
     };
 
-    const content = <div style={{ background: '#F6F9FC', height: '120px' }} />;
-
     return (
       <Drawer visible={true}>
         <DrawerPageLayout title="我的服务">
-          <div style={{ marginBottom: '40px' }}>
-            <Spreader title="基本信息">
-              <div>这里是基本信息</div>
-              <div>这里是基本信息</div>
-              <div>这里是基本信息</div>
-            </Spreader>
-          </div>
-          <Section id="pg1" title="模块1">
-            {content}
-          </Section>
-          <Section id="pg2" title="模块2">
-            {content}
-          </Section>
-          <Section id="pg3" title="模块3">
-            {content}
-          </Section>
-          <Section id="pg4" title="模块4">
-            {content}
-          </Section>
-          <Section id="pg5" title="模块5">
-            {content}
-          </Section>
-          <Section id="pg6" title="模块6">
-            {content}
-            {content}
-            {content}
+          <Section title="基本信息">{content}</Section>
+          <Section title="模块1">{content}</Section>
+          <Section title="模块2">{content}</Section>
+          <Section title="模块3">{content}</Section>
+          <Section title="模块5">
             {content}
             {content}
           </Section>
+        </DrawerPageLayout>
+      </Drawer>
+    );
+  })
+  .add('带footer', () => {
+    const footer = (
+      <div style={{ textAlign: 'left' }}>
+        <Space size={20}>
+          <Button>取消</Button>
+          <Button type="primary">提交</Button>
+        </Space>
+      </div>
+    );
+    return (
+      <Drawer visible={true}>
+        <DrawerPageLayout title="我的服务" footer={footer}>
+          <Section title="模块1">{content}</Section>
+          <Section title="模块2">{content}</Section>
+          <Section title="模块3">{content}</Section>
+          <Section title="模块4">{content}</Section>
         </DrawerPageLayout>
       </Drawer>
     );
