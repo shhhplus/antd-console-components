@@ -1,10 +1,4 @@
-import React, {
-  ComponentType,
-  ReactNode,
-  useCallback,
-  useState,
-  createContext,
-} from 'react';
+import React, { ComponentType, ReactNode, useCallback, useState } from 'react';
 import {
   HashRouter as Router,
   Switch,
@@ -32,7 +26,7 @@ interface Props {
   routes: Array<any>;
   menus: Array<any>;
   Login: ComponentType<LoginProps>;
-  headers: Array<ReactNode>;
+  headers?: ReactNode;
 }
 
 const _sider_width = [80, 200];

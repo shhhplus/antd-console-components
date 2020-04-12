@@ -23,7 +23,7 @@ const { Item, SubMenu, ItemGroup } = Menu;
 //   return true;
 // };
 
-const Title = ({ icon, name }: { icon: ReactNode; name: string }) => {
+const Title = ({ icon, name }: { icon?: ReactNode; name: string }) => {
   return (
     <Fragment>
       {icon}

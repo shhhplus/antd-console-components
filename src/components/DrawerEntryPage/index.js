@@ -15,8 +15,6 @@ import {
 import { matchPath } from 'react-router';
 import path from 'path';
 import Drawer from '../Drawer';
-import Back from '../Back';
-import styles from './index.module.scss';
 
 export default ({ children, routes, drawerWidth }) => {
   const [width, setWidth] = useState(drawerWidth);

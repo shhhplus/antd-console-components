@@ -107,7 +107,7 @@ const Demo = () => {
       menus={menus}
       headers={
         <Fragment>
-          <Account onLogoutSubmit={logout}></Account>
+          <Account onLogoutSubmit={logout} />
           <Account onLogoutSubmit={logout}>
             <Menu.Item key="uc">
               <UserOutlined />

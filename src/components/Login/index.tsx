@@ -4,7 +4,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 
 export interface LoginProps {
-  title: ReactNode;
+  title?: ReactNode;
   bgStyle: Object;
   onSubmit: (values: Object) => Promise<void>;
   onSuccess: () => void;

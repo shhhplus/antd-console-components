@@ -35,10 +35,10 @@ export default ({ children, onLogoutSubmit }: Props) => {
         </Menu.Item>
       </Menu>
     );
-  }, [logout]);
+  }, [children, logout]);
 
   if (!userinfo) {
-    return;
+    return null;
   }
 
   return (
