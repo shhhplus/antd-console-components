@@ -1,17 +1,26 @@
 import React, { ComponentType } from 'react';
-import { UseUserResult } from '../_types';
+// import { UseUserResult } from '../_types';
 import useUser from './useUser';
 
-interface CompProps {
-  user: UseUserResult;
-}
+// type HOC<InjectedProps> = <Props extends InjectedProps>(
+//   Component: ComponentType<Props>,
+// ) => ComponentType<Omit<Props, keyof InjectedProps>>;
 
-export default (Comp: ComponentType<CompProps>) => {
-  const user = useUser();
+// type Exclude<T, U> = T extends U ? never : T;
+// type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-  if (!user.data) {
-    return null;
-  }
+// interface InjectedProps {
+//   user: UseUserResult;
+// }
 
-  return user.data ? <Comp user={user} /> : null;
+export default (Comp: ComponentType<any>) => {
+  return (props: ComponentType<any>) => {
+    const user = useUser();
+
+    if (!user.data) {
+      return null;
+    }
+
+    return <Comp {...props} user={user} />;
+  };
 };

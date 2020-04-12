@@ -53,16 +53,16 @@ export default ({ children, routes, drawerWidth }) => {
   }, [history, exitUrl]);
 
   useEffect(() => {
-    console.log('[DrawerEntryPage] mounted');
+    console.log('[DrawerPageEntry] mounted');
   }, []);
 
   const routes2use = useMemo(() => {
-    console.log('[DrawerEntryPage] routes changed');
+    console.log('[DrawerPageEntry] routes changed');
     return (routes || []).map((route) => {
       const OriginalComponent = route.component;
       const WrappedComp = (props) => {
         useEffect(() => {
-          console.log('[DrawerEntryPage] subpage onMounted:', route);
+          console.log('[DrawerPageEntry] subpage onMounted:', route);
           setWidth(route.width || drawerWidth);
         }, []);
         return <OriginalComponent {...props} exit={exit} />;

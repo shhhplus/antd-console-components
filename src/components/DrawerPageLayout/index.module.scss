@@ -1,0 +1,32 @@
+.page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.body {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 16px 24px;
+}
+
+.footer {
+  border-top: 1px solid #f0f0f0;
+  padding: 10px 24px;
+}
+
+.fresh {
+  margin-left: 16px;
+  display: inline-block;
+  line-height: 16px;
+
+  .icon {
+    font-size: 16px;
+    vertical-align: baseline;
+    cursor: pointer;
+  }
+}

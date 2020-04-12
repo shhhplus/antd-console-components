@@ -1,17 +1,18 @@
 import React, { ReactNode, useMemo, useCallback } from 'react';
 import { Dropdown, Menu, Avatar, message } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
+// import { UseUserResult } from '../../_types';
 import { useUser } from '../../user';
 import styles from './index.module.scss';
 
 interface Props {
+  // user: UseUserResult;
   children?: ReactNode;
   onLogoutSubmit: () => Promise<void>;
 }
 
 export default ({ children, onLogoutSubmit }: Props) => {
   const user = useUser();
-
   const userinfo = useMemo(() => user.data, [user]);
 
   const logout = useCallback(() => {

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useMemo } from 'react';
-import { Button, Form, Input, Card } from 'antd';
+import { PageHeader, Button, Form, Input, Card } from 'antd';
 import { Link as RelativeLink } from '@shhhplus/react-router-relative-link';
 import { PlusOutlined } from '@ant-design/icons';
-import Page from '../../components/Page';
-import DrawerEntryPage from '../../components/DrawerEntryPage';
+import DrawerPageLayout from '../../components/DrawerPageLayout';
+import PageLayout from '../../components/PageLayout';
+import DrawerPageEntry from '../../components/DrawerPageEntry';
 import KeywordSearch from '../../components/KeywordSearch';
 import SearchTable from '../../components/SearchTable';
 
@@ -35,7 +36,7 @@ const Create = ({ exit }) => {
     return <div style={{ width: '80px' }}>{children}</div>;
   };
   return (
-    <Page title="新增学生">
+    <DrawerPageLayout title="新增学生">
       <Form form={form}>
         <Form.Item label={<Label>姓名</Label>} name="username" rules={[]}>
           <Input />
@@ -56,7 +57,7 @@ const Create = ({ exit }) => {
           </div>
         </Form.Item>
       </Form>
-    </Page>
+    </DrawerPageLayout>
   );
 };
 
@@ -87,13 +88,8 @@ export default () => {
   }, []);
 
   return (
-    <DrawerEntryPage routes={routes}>
-      <Page
-        title="学生管理"
-        onFresh={() => {
-          instanceRef.current.search();
-        }}
-      >
+    <DrawerPageEntry routes={routes}>
+      <PageLayout header={<PageHeader title="学生管理" />}>
         <Card>
           <SearchTable
             header={
@@ -125,7 +121,7 @@ export default () => {
             <Column title="地址" dataIndex="address" />
           </SearchTable>
         </Card>
-      </Page>
-    </DrawerEntryPage>
+      </PageLayout>
+    </DrawerPageEntry>
   );
 };
