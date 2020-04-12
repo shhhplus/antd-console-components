@@ -1,12 +1,12 @@
 import React, { ReactNode, useMemo, useCallback } from 'react';
 import { Dropdown, Menu, Avatar, message } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
-import { UseUserResult } from '../../_types';
+// import { UseUserResult } from '../../_types';
 import { useUser } from '../../user';
 import styles from './index.module.scss';
 
 interface Props {
-  user: UseUserResult;
+  // user: UseUserResult;
   children?: ReactNode;
   onLogoutSubmit: () => Promise<void>;
 }
