@@ -1,4 +1,11 @@
-import React, { FC, ReactNode, useCallback, useState } from 'react';
+import React, {
+  ComponentType,
+  ReactNode,
+  useCallback,
+  useState,
+  useRef,
+  useEffect,
+} from 'react';
 import { Space, Card, Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
@@ -10,7 +17,7 @@ export interface LoginProps {
   onSuccess: () => void;
 }
 
-const Login: FC<LoginProps> = ({
+const Login: ComponentType<LoginProps> = ({
   title = '登录',
   bgStyle,
   onSubmit,
@@ -18,6 +25,16 @@ const Login: FC<LoginProps> = ({
 }: LoginProps) => {
   const [form] = Form.useForm();
   const [processing, setProcessing] = useState(false);
+  const instanceRef = useRef<any>();
+
+  useEffect(() => {
+    return () => {
+      if (instanceRef.current) {
+        instanceRef.current();
+        instanceRef.current = null;
+      }
+    };
+  }, []);
 
   const submit = useCallback(() => {
     if (processing) {
@@ -30,7 +47,18 @@ const Login: FC<LoginProps> = ({
         if (onSubmit) {
           onSubmit(values)
             .then(onSuccess, (msg) => {
-              msg && message.error(msg);
+              if (instanceRef.current) {
+                instanceRef.current();
+                instanceRef.current = null;
+              }
+              if (msg) {
+                instanceRef.current = message.error({
+                  content: msg,
+                  onClose: () => {
+                    instanceRef.current = null;
+                  },
+                });
+              }
             })
             .finally(() => {
               setProcessing(false);
