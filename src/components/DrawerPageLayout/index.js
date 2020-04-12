@@ -1,36 +1,39 @@
-import React from 'react';
-import classNames from 'classnames/bind';
-import Back from '../Back';
-import PageTitle from '../PageTitle';
+import React, { useMemo } from 'react';
+import { PageHeader } from 'antd';
+import { SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
-
-const cx = classNames.bind(styles);
 
 export default ({
   title,
   onFresh,
   extra,
   children,
+  footer,
   onBack,
-  anchor,
   fullfilled,
 }) => {
-  return (
-    <div
-      className={cx({
-        'page-fullfilled': fullfilled,
-      })}
-    >
-      {onBack && (
-        <div>
-          <Back onBack={onBack} />
-        </div>
-      )}
-      <PageTitle title={title} onFresh={onFresh} extra={extra} />
-      <div className={styles['page-body']}>
-        <div className={styles['page-left']}>{children}</div>
-        {anchor && <div className={styles['page-right']}>{anchor}</div>}
+  const title2use = useMemo(() => {
+    return (
+      <div>
+        {title}
+        {onFresh && (
+          <span className={styles['fresh']} onClick={onFresh}>
+            <SyncOutlined className={styles['icon']} />
+          </span>
+        )}
       </div>
+    );
+  }, [title, onFresh]);
+  return (
+    <div className={styles['page']}>
+      <PageHeader
+        title={title2use}
+        onBack={onBack}
+        extra={extra}
+        className={styles['header']}
+      />
+      <div className={styles['body']}>{children}</div>
+      <div className={styles['footer']}>{footer}</div>
     </div>
   );
 };

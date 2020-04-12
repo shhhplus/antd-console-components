@@ -24,9 +24,13 @@ const StandardDemo = (porps) => {
       </Space>
       <Drawer visible={visible} onClose={() => setVisible(false)}>
         <DrawerPageLayout title="详情">
-          <div style={{ lineHeight: '300px' }}>this is content.</div>
-          <div style={{ lineHeight: '300px' }}>this is content.</div>
-          <div style={{ lineHeight: '300px' }}>this is content.</div>
+          {new Array(30).fill('').map((item, idx) => {
+            return (
+              <div key={idx} style={{ lineHeight: '50px' }}>
+                {idx + 1}.this is content
+              </div>
+            );
+          })}
         </DrawerPageLayout>
       </Drawer>
     </Demo>

@@ -1,27 +1,31 @@
 .page {
-}
-
-.page-fullfilled {
   height: 100%;
   display: flex;
   flex-direction: column;
-
-  .page-body {
-    flex-grow: 1;
-    overflow: auto;
-  }
 }
 
-.page-body {
-  display: flex;
+.header {
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.page-left {
+.body {
   flex-grow: 1;
+  overflow: auto;
+  padding: 16px 24px;
+}
+
+.footer {
   overflow: auto;
 }
 
-.page-right {
-  width: 200px;
-  margin-left: 48px;
+.fresh {
+  margin-left: 16px;
+  display: inline-block;
+  line-height: 16px;
+
+  .icon {
+    font-size: 16px;
+    vertical-align: baseline;
+    cursor: pointer;
+  }
 }
