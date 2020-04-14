@@ -14,7 +14,7 @@ npm install antd-console-components --save
 
 [查看 Api 文档](https://shhhplus.github.io/antd-console-components/)
 
-[查看 Demo 源代码](https://shhhplus.github.io/antd-console-components-demo/)
+[查看 Demo 源代码](https://github.com/shhhplus/antd-console-components-demo/)
 
 # Usage
 
