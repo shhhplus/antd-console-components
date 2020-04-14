@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo, useCallback } from 'react';
 import { PageHeader, Button, Form, Input, Card } from 'antd';
 import { Link as RelativeLink } from '@shhhplus/react-router-relative-link';
 import { PlusOutlined } from '@ant-design/icons';
@@ -9,26 +9,6 @@ import KeywordSearch from '../../components/KeywordSearch';
 import SearchTable from '../../components/SearchTable';
 
 const Column = SearchTable.Column;
-
-const search = ({ values, pagination, filters, sorter, extra }) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        records: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((idx) => {
-          const number = 100 * (pagination.current - 1) + idx;
-          return {
-            id: number,
-            name: `员工-${number}`,
-            cellphone: (13800138000 + idx).toString(),
-            address: `闸北区大宁灵石公园${number}号`,
-          };
-        }),
-        current: pagination.current,
-        total: 55,
-      });
-    }, 500);
-  });
-};
 
 const Create = ({ exit }) => {
   const [form] = Form.useForm();
@@ -64,6 +44,27 @@ const Create = ({ exit }) => {
 export default () => {
   // SearchTable的实例
   const instanceRef = useRef(null);
+  const valuesRef = useRef({});
+
+  const search = useCallback(({ pagination, filters, sorter, extra }) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          records: new Array(pagination.pageSize).fill().map((item, idx) => {
+            const number = 100 * (pagination.current - 1) + idx;
+            return {
+              id: number,
+              name: `员工-${number}`,
+              cellphone: (13800138000 + idx).toString(),
+              address: `闸北区大宁灵石公园${number}号`,
+            };
+          }),
+          current: pagination.current,
+          total: 55,
+        });
+      }, 500);
+    });
+  }, []);
 
   useEffect(() => {
     // 触发搜索
@@ -96,8 +97,11 @@ export default () => {
               <KeywordSearch
                 left={extra}
                 onSubmit={(keyword) => {
+                  valuesRef.current = {
+                    keyword,
+                  };
                   instanceRef.current.search({
-                    values: { keyword },
+                    current: 1,
                   });
                 }}
               />

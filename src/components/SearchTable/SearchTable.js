@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react';
+import React, { Fragment, useState, useEffect, useRef, useMemo } from 'react';
 import { Table, message } from 'antd';
 import styles from './index.module.scss';
 import Column from './Column';
@@ -16,94 +16,107 @@ export default function SearchTable({
   pageSize = _DefaultPageSize,
   ...rest
 }) {
-  const [values, setValues] = useState({});
+  const mountedRef = useRef(true);
+  const filtersRef = useRef({});
+  const sorterRef = useRef({});
+  const extraRef = useRef({});
+  const searchRef = useRef(null);
+  const [begin, setBegin] = useState(false);
+
+  const [searching, setSearching] = useState(false);
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize,
   });
-  const [filters, setFilters] = useState({});
-  const [sorter, setSorter] = useState({});
-  const [extra, setExtra] = useState({});
+
   const [data, setData] = useState({
     records: [],
     total: 0,
   });
-  const [doSearch, setDoSearch] = useState(false);
-  const [searching, setSearching] = useState(false);
-  const mounted = useRef(true);
 
   useEffect(() => {
-    return () => (mounted.current = false);
+    searchRef.current = search;
+  }, [search]);
+
+  useEffect(() => {
+    return () => (mountedRef.current = false);
   }, []);
 
   useEffect(() => {
-    if (!doSearch) {
+    if (!mountedRef.current) {
+      console.log('mounted is', mountedRef.current);
       return;
     }
 
-    setDoSearch(false);
-
-    if (!mounted.current) {
-      console.log('mounted is', mounted.current);
+    if (!searchRef.current) {
+      console.log('searchRef.current is', searchRef.current);
       return;
     }
 
-    console.log(
-      '[SearchTable] onSearchBegin. values:',
-      values,
-      ', pagination:',
-      pagination,
-      ', filters:',
-      filters,
-      ', sorter:',
-      sorter,
-    );
+    if (!begin) {
+      return;
+    }
+
+    if (searching) {
+      return;
+    }
+
     setSearching(true);
-    search({
-      values,
+
+    const params = {
       pagination,
-      filters,
-      sorter,
-      extra,
-    }).then(
-      ({ records, current, pageSize, total }) => {
-        setSearching(false);
-        if (!mounted.current) {
-          console.log('mounted is', mounted.current);
-          return;
-        }
-        // 搜索成功
-        // console.log('onSearchSuccess');
-        setData({
-          records,
-          total,
-        });
-      },
-      (msg) => {
-        if (!mounted.current) {
-          console.log('mounted is', mounted.current);
-          return;
-        }
+      filters: filtersRef.current,
+      sorter: sorterRef.current,
+      extra: extraRef.current,
+    };
+    console.log('[SearchTable] onSearchBegin. params:', params);
 
+    searchRef
+      .current(params)
+      .then(
+        ({ records, current, pageSize, total }) => {
+          if (mountedRef.current) {
+            // 搜索成功
+            // console.log('onSearchSuccess');
+            setData({
+              records,
+              total,
+            });
+          } else {
+            console.log('mounted is', mountedRef.current);
+          }
+        },
+        (msg) => {
+          if (mountedRef.current) {
+            message.error(msg || '查询失败', 2);
+          } else {
+            console.log('mounted is', mountedRef.current);
+          }
+        },
+      )
+      .finally(() => {
+        setBegin(false);
         setSearching(false);
-        message.error(msg || '查询失败', 2);
-      },
-    );
-  }, [doSearch]);
+      });
+  }, [searching, pagination]);
 
-  onRef &&
+  useEffect(() => {
+    if (!onRef) {
+      return;
+    }
     onRef({
       search: (params = {}) => {
-        setValues(params.values || values);
         setPagination({
           ...pagination,
           current: params.current || pagination.current,
         });
-        setDoSearch(true);
+        let b = begin;
+        setBegin(true);
       },
     });
+  }, [onRef, pagination, begin]);
 
-  const pagination2use = (() => {
+  const pagination2use = useMemo(() => {
     if (!paginationShown) {
       return false;
     }
@@ -118,9 +131,9 @@ export default function SearchTable({
       },
       pageSizeOptions: ['5', '10', '20', '30', '40'],
     };
-  })();
+  }, [paginationShown, pagination, data]);
 
-  const columns2use = (() => {
+  const columns2use = useMemo(() => {
     if (children) {
       return React.Children.map(children, (child) => {
         if (child.type === Column) {
@@ -132,9 +145,10 @@ export default function SearchTable({
           return null;
         }
       }).filter((i) => i);
+    } else {
+      return columns;
     }
-    return columns;
-  })();
+  }, [children, columns]);
 
   return (
     <Fragment>
@@ -147,14 +161,14 @@ export default function SearchTable({
         loading={searching}
         pagination={pagination2use}
         onChange={(pagination, filters, sorter, extra) => {
-          setFilters(filters);
-          setSorter(sorter);
-          setExtra(extra);
+          filtersRef.current = filters;
+          sorterRef.current = sorter;
+          extraRef.current = extra;
           setPagination({
             current: pagination.current,
             pageSize: pagination.pageSize,
           });
-          setDoSearch(true);
+          setBegin(true);
         }}
       />
     </Fragment>
