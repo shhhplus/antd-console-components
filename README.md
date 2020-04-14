@@ -2,7 +2,7 @@
 
 # Introduction
 
-对控制台类型网站的通用组件做了封装，通过简单的配置就能搭建一个完整的 App，随后开发单个页面即可。[查看 Demo](https://shhhplus.github.io/antd-console-components/)。
+对控制台类型网站的通用组件做了封装，通过简单的配置就能搭建一个完整的 App，随后开发单个页面即可。[查看 Demo](https://shhhplus.github.io/antd-console-components-demo/)。
 
 # Install
 
@@ -12,23 +12,28 @@ npm install antd-console-components --save
 
 # Doc
 
-[点击链接](https://shhhplus.github.io/antd-console-components/)，查看使用文档。
+[查看 Api 文档](https://shhhplus.github.io/antd-console-components/)
+
+[查看 Demo 源代码](https://shhhplus.github.io/antd-console-components-demo/)
 
 # Usage
 
 ```jsx
-import React, { useCallback } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import ReactDOM from 'react-dom';
+import { PageHeader, Menu } from 'antd';
 import {
   BarChartOutlined,
   CloudOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { App, Login, Page, Section } from 'antd-console-components';
+import { App, Login, PageLayout, Section, headers } from 'antd-console-components';
+
+const { Account } = headers;
 
 const DashboardPage = () => {
   return (
-    <Page title="主面板">
+    <PageLayout header={<PageHeader title="主面板" />}>
       <Section title="我的待办" onFresh={() => {}}>
         <div style={{ padding: '0 0 60px 0' }}>todo 1</div>
         <div style={{ padding: '0 0 60px 0' }}>todo 2</div>
@@ -39,13 +44,13 @@ const DashboardPage = () => {
         <div style={{ padding: '0 0 60px 0' }}>notification 2</div>
         <div style={{ padding: '0 0 60px 0' }}>notification 3</div>
       </Section>
-    </Page>
+    </PageLayout>
   );
 };
 
 const TeacherPage = () => {
   return (
-    <Page title="老师管理">
+    <PageLayout header={<PageHeader title="老师管理" />}>
       <Section title="语文老师" onFresh={() => {}}>
         <div style={{ padding: '0 0 60px 0' }}>teacher 1</div>
         <div style={{ padding: '0 0 60px 0' }}>teacher 2</div>
@@ -56,13 +61,13 @@ const TeacherPage = () => {
         <div style={{ padding: '0 0 60px 0' }}>teacher 2</div>
         <div style={{ padding: '0 0 60px 0' }}>teacher 3</div>
       </Section>
-    </Page>
+    </PageLayout>
   );
 };
 
 const StudentPage = () => {
   return (
-    <Page title="学生管理">
+    <PageLayout header={<PageHeader title="学生管理" />}>
       <Section title="高中学生" onFresh={() => {}}>
         <div style={{ padding: '0 0 60px 0' }}>student 1</div>
         <div style={{ padding: '0 0 60px 0' }}>student 2</div>
@@ -73,7 +78,7 @@ const StudentPage = () => {
         <div style={{ padding: '0 0 60px 0' }}>student 2</div>
         <div style={{ padding: '0 0 60px 0' }}>student 3</div>
       </Section>
-    </Page>
+    </PageLayout>
   );
 };
 
@@ -181,6 +186,22 @@ const DemoApp = () => {
       logout={logout}
       routes={routes}
       menus={menus}
+      headers={
+        <Fragment>
+          <Account onLogoutSubmit={logout}>
+            <Menu.Item key="uc">
+              <UserOutlined />
+              个人中心
+            </Menu.Item>
+            <Menu.Item key="settings">
+              <SettingOutlined />
+              个人设置
+            </Menu.Item>
+            <Menu.Divider />
+          </Account>
+        </Fragment>
+      }
+    />
     />
   );
 };

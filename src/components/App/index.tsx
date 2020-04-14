@@ -61,42 +61,44 @@ export default ({ Login, getUser, logout, routes, menus, headers }: Props) => {
   }
 
   return (
-    <UserContext.Provider value={user}>
-      <Router>
-        <Layout>
-          <Sider className={styles['sider']} collapsed={collapsed}>
-            <div className={styles['logo']} />
-            <RouteMenu data={menus} />
-          </Sider>
-          <Layout
-            className={styles['right']}
-            style={{
-              marginLeft: collapsed ? _sider_width[0] : _sider_width[1],
-            }}
-          >
-            <Header
-              className={styles['header']}
-              style={{ left: collapsed ? _sider_width[0] : _sider_width[1] }}
+    <div className={styles['app']}>
+      <UserContext.Provider value={user}>
+        <Router>
+          <Layout>
+            <Sider className={styles['sider']} collapsed={collapsed}>
+              <div className={styles['logo']} />
+              <RouteMenu data={menus} />
+            </Sider>
+            <Layout
+              className={styles['right']}
+              style={{
+                marginLeft: collapsed ? _sider_width[0] : _sider_width[1],
+              }}
             >
-              {/* <span className={styles['trigger']} onClick={toggle}>
+              <Header
+                className={styles['header']}
+                style={{ left: collapsed ? _sider_width[0] : _sider_width[1] }}
+              >
+                {/* <span className={styles['trigger']} onClick={toggle}>
               {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </span> */}
-              <div className={styles['header-right']}>
-                {headers ? headers : <Account onLogoutSubmit={logout} />}
-              </div>
-            </Header>
-            <Content className={styles['content']}>
-              <Switch>
-                {routes.map((route, idx) => {
-                  return <Route key={idx} {...route} />;
-                })}
-                {routes.length > 0 ? <Redirect to={routes[0].path} /> : null}
-              </Switch>
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>this is footer</Footer>
+                <div className={styles['header-right']}>
+                  {headers ? headers : <Account onLogoutSubmit={logout} />}
+                </div>
+              </Header>
+              <Content className={styles['content']}>
+                <Switch>
+                  {routes.map((route, idx) => {
+                    return <Route key={idx} {...route} />;
+                  })}
+                  {routes.length > 0 ? <Redirect to={routes[0].path} /> : null}
+                </Switch>
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>this is footer</Footer>
+            </Layout>
           </Layout>
-        </Layout>
-      </Router>
-    </UserContext.Provider>
+        </Router>
+      </UserContext.Provider>
+    </div>
   );
 };
