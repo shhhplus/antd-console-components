@@ -17,7 +17,6 @@ export default (props) => {
       {...rest}
       className={classNames(styles['drawer'], className)}
       maskClosable={false}
-      destroyOnClose={true}
       width={width}
       visible={visible}
       title={null}

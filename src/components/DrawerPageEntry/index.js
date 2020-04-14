@@ -80,7 +80,12 @@ export default ({ children, routes, drawerWidth }) => {
   return (
     <Fragment>
       {children}
-      <Drawer visible={visible} width={visible ? width : 0} onClose={exit}>
+      <Drawer
+        visible={visible}
+        width={width}
+        onClose={exit}
+        destroyOnClose={false}
+      >
         <Switch>
           {routes2use.map((route, idx) => {
             return (
