@@ -33,7 +33,7 @@ export default [
       },
       {
         icon: <CloudOutlined />,
-        name: '用户管理',
+        name: '学生管理',
         path: '/student',
       },
     ],
