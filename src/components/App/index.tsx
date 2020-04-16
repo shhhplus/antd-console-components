@@ -2,6 +2,7 @@ import React, {
   ComponentType,
   ReactNode,
   useCallback,
+  useEffect,
   useState,
   useMemo,
 } from 'react';
@@ -62,6 +63,8 @@ export default ({
 
   const user = useFetch(getUser2use);
 
+  const fetchUser = useMemo(() => user.fetch, [user]);
+
   const onLoginSuccess = useCallback(() => {
     setInitialized(false);
     user.fetch();
@@ -70,6 +73,10 @@ export default ({
   const toggle = useCallback(() => {
     setCollapsed(!collapsed);
   }, [collapsed]);
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   if (!initialized) {
     return <Initializing2Use />;
