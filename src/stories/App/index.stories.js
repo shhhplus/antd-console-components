@@ -6,6 +6,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
+import Initializing from './Initializing';
 import App from '../../components/App';
 import Login from '../../components/Login';
 import { Account } from '../../components/headers';
@@ -41,7 +42,7 @@ const getUser = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(user.get());
-    }, 500);
+    }, 1000);
   });
 };
 
@@ -100,6 +101,7 @@ const routes = [
 const Demo = () => {
   return (
     <App
+      Initializing={Initializing}
       Login={LoginPage}
       getUser={getUser}
       logout={logout}
