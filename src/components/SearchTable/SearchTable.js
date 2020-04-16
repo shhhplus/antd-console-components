@@ -98,7 +98,7 @@ export default function SearchTable({
         setBegin(false);
         setSearching(false);
       });
-  }, [searching, pagination]);
+  }, [begin, searching, pagination]);
 
   useEffect(() => {
     if (!onRef) {
@@ -110,11 +110,10 @@ export default function SearchTable({
           ...pagination,
           current: params.current || pagination.current,
         });
-        let b = begin;
         setBegin(true);
       },
     });
-  }, [onRef, pagination, begin]);
+  }, [onRef, pagination]);
 
   const pagination2use = useMemo(() => {
     if (!paginationShown) {
