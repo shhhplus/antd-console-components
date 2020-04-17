@@ -17,9 +17,9 @@ import path from 'path';
 import Drawer from '../Drawer';
 
 export default ({ children, routes, drawerWidth }) => {
-  const [width, setWidth] = useState(drawerWidth);
-  const [exitUrl, setExitUrl] = useState('');
   const { url } = useRouteMatch();
+  const [width, setWidth] = useState(drawerWidth);
+  const [exitUrl, setExitUrl] = useState(url);
 
   const history = useHistory();
   const location = useLocation();
