@@ -2,6 +2,7 @@
   :global {
     .ant-drawer-close {
       left: -32px;
+      overflow: hidden;
 
       .anticon-close {
         margin-left: -12px;
