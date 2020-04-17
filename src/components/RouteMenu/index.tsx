@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useState,
   useMemo,
+  useRef,
 } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { Menu } from 'antd';
@@ -80,10 +81,18 @@ export default ({ data = [] }: { data: Array<any> }) => {
     return getMatchedLeafPaths(data2use, pathname);
   }, [data2use, pathname]);
 
+  const openKeysRef = useRef<Array<string>>([]);
+
+  useEffect(() => {
+    openKeysRef.current = openKeys;
+  }, [openKeys]);
+
   useEffect(() => {
     const paths = getMatchedPaths(data2use, pathname);
+    // 删除第一条数据（叶子节点）
+    paths.shift();
     // 合并并去重
-    const list2use = Array.from(new Set([...openKeys, ...paths]));
+    const list2use = Array.from(new Set([...openKeysRef.current, ...paths]));
     setOpenKeys(list2use);
   }, [data2use, pathname]);
 

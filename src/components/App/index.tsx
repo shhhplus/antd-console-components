@@ -1,4 +1,11 @@
-import React, { ComponentType, ReactNode, useCallback, useState } from 'react';
+import React, {
+  ComponentType,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+  useMemo,
+} from 'react';
 import {
   HashRouter as Router,
   Switch,
@@ -6,7 +13,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { Layout } from 'antd';
-import Initializing from '../Initializing';
+import DefaultInitializing from '../Initializing';
 import { Account } from '../headers';
 import RouteMenu from '../RouteMenu';
 import { GetUser } from '../_types';
@@ -26,14 +33,27 @@ interface Props {
   routes: Array<any>;
   menus: Array<any>;
   Login: ComponentType<LoginProps>;
+  Initializing: ComponentType<any>;
   headers?: ReactNode;
 }
 
 const _sider_width = [80, 200];
 
-export default ({ Login, getUser, logout, routes, menus, headers }: Props) => {
+export default ({
+  Login,
+  Initializing,
+  getUser,
+  logout,
+  routes,
+  menus,
+  headers,
+}: Props) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<boolean>(false);
+
+  const Initializing2Use = useMemo(() => {
+    return Initializing || DefaultInitializing;
+  }, [Initializing]);
 
   const getUser2use = useCallback(() => {
     return getUser().finally(() => {
@@ -42,6 +62,8 @@ export default ({ Login, getUser, logout, routes, menus, headers }: Props) => {
   }, [getUser]);
 
   const user = useFetch(getUser2use);
+
+  const fetchUser = useMemo(() => user.fetch, [user]);
 
   const onLoginSuccess = useCallback(() => {
     setInitialized(false);
@@ -52,8 +74,12 @@ export default ({ Login, getUser, logout, routes, menus, headers }: Props) => {
     setCollapsed(!collapsed);
   }, [collapsed]);
 
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
+
   if (!initialized) {
-    return <Initializing />;
+    return <Initializing2Use />;
   }
 
   if (!user.data) {

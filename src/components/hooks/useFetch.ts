@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import { UseFetchResult } from '../_types';
 
 const _InitialData = null;
@@ -38,10 +38,6 @@ export default (fn: () => Promise<any>): UseFetchResult => {
       reset,
     };
   }, [data, fetching, fetch, reset]);
-
-  useEffect(() => {
-    fetch();
-  }, [fetch]);
 
   return res;
 };
