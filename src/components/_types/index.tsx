@@ -16,3 +16,4 @@ export interface UseFetchResult {
 export interface UseUserResult extends UseFetchResult {
   data: Userinfo | null | undefined;
 }
+export interface UsePermissionResult extends UseFetchResult {}

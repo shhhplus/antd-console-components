@@ -1,7 +1,6 @@
+import PermissionContext from './PermissionContext';
 import UserContext from './UserContext';
 
-export default {
-  UserContext,
-};
+export default { PermissionContext, UserContext };
 
-export { UserContext };
+export { PermissionContext, UserContext };
