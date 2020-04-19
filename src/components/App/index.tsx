@@ -128,9 +128,9 @@ export default ({
   }
 
   return (
-    <div className={styles['app']}>
-      <UserContext.Provider value={user}>
-        <PermissionContext.Provider value={permission}>
+    <UserContext.Provider value={user}>
+      <PermissionContext.Provider value={permission}>
+        <div className={styles['app']}>
           <Router>
             <Layout>
               <Sider className={styles['sider']} collapsed={collapsed}>
@@ -170,8 +170,8 @@ export default ({
               </Layout>
             </Layout>
           </Router>
-        </PermissionContext.Provider>
-      </UserContext.Provider>
-    </div>
+        </div>
+      </PermissionContext.Provider>
+    </UserContext.Provider>
   );
 };
