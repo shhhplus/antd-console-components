@@ -2,7 +2,7 @@
 
 # Introduction
 
-对控制台类型网站的通用组件做了封装，通过简单的配置就能搭建一个完整的 App，随后开发单个页面即可。[查看 Demo](https://shhhplus.github.io/antd-console-components-demo/)。
+对控制台类型网站的通用组件做了封装，通过简单的配置就能搭建一个完整的 App，随后开发单个页面即可。[查看 Demo](https://shhhplus.github.io/antd-console-components-demo)。
 
 # Install
 
@@ -12,9 +12,9 @@ npm install antd-console-components --save
 
 # Doc
 
-[查看 Api 文档](https://shhhplus.github.io/antd-console-components/)
+[查看 Api 文档](https://shhhplus.github.io/antd-console-components)
 
-[查看 Demo 源代码](https://github.com/shhhplus/antd-console-components-demo/)
+[查看 Demo 源代码](https://github.com/shhhplus/antd-console-components-demo)
 
 # Usage
 

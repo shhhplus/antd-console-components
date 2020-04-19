@@ -56,6 +56,11 @@ const createEntryFile = async () => {
   fs.writeFileSync(entryFile, list.join('\r\n'));
 };
 
+const createEntryDFile = async () => {
+  const content = fs.readFileSync(entryFile);
+  fs.writeFileSync(path.join(packageFolder, 'index.d.ts'), content);
+};
+
 const createInputOptions = async () => {
   const extensions = ['.js', '.jsx', '.ts', '.tsx'];
   return {
@@ -125,6 +130,7 @@ const build = async () => {
   // console.log('outputOptions:', outputOptions);
   const bundle = await rollup(inputOptions);
   await bundle.write(outputOptions);
+  await createEntryDFile();
 };
 
 const createPackageDotJson = async () => {
