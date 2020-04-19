@@ -1,14 +1,14 @@
 import React, { ComponentType } from 'react';
-import useConf from './useConf';
+import usePermission from './usePermission';
 
 export default (Comp: ComponentType<any>) => {
   return (props: ComponentType<any>) => {
-    const conf = useConf();
+    const permission = usePermission();
 
-    if (!conf.data) {
+    if (!permission.data) {
       return null;
     }
 
-    return <Comp {...props} conf={conf} />;
+    return <Comp {...props} permission={permission} />;
   };
 };

@@ -29,6 +29,12 @@ const SyncTask = () => {
       <div>每{interval}ms执行一次</div>
       <div>第{count}次触发</div>
       <Timer interval={interval} onElapsed={onElapsed} />
+      <Timer
+        interval={5000}
+        onElapsed={() => {
+          console.log('onElapsed. now:', Date.now() / 1000);
+        }}
+      />
     </Demo>
   );
 };

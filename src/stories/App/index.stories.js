@@ -46,6 +46,19 @@ const getUser = () => {
   });
 };
 
+const getPermission = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        'pc-1': true,
+        'pc-2': true,
+        'pc-3': true,
+        'pc-4': true,
+      });
+    }, 500);
+  });
+};
+
 const LoginPage = ({ onSuccess }) => {
   const submit = useCallback(({ username, password }) => {
     return new Promise((resolve, reject) => {
@@ -104,6 +117,7 @@ const Demo = () => {
       Initializing={Initializing}
       Login={LoginPage}
       getUser={getUser}
+      getPermission={getPermission}
       logout={logout}
       routes={routes}
       menus={menus}

@@ -10,6 +10,17 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 
+// ac = access check = 访问检查（当前用户是否能访问该菜单）
+
+const createAc = (code) => {
+  return ({ userinfo, permission }) => {
+    if (!permission) {
+      return false;
+    }
+    return permission[code] || false;
+  };
+};
+
 export default [
   {
     icon: <UserOutlined />,
@@ -23,13 +34,15 @@ export default [
     children: [
       {
         icon: <AppstoreOutlined />,
-        name: '员工管理',
+        name: '员工管理(带权限)',
         path: '/staff',
+        ac: createAc('pc-1'),
       },
       {
         icon: <BarChartOutlined />,
-        name: '老师管理',
+        name: '老师管理(带权限)',
         path: '/teacher',
+        ac: createAc('pc-2'),
       },
       {
         icon: <CloudOutlined />,
@@ -40,13 +53,15 @@ export default [
   },
   {
     icon: <ShopOutlined />,
-    name: '科目管理',
+    name: '科目管理(带权限)',
     path: '/subject',
+    ac: createAc('pc-3'),
   },
   {
     icon: <TeamOutlined />,
-    name: '课程管理',
+    name: '课程管理(带权限)',
     path: '/course',
+    ac: createAc('pc-4'),
   },
   {
     icon: <UploadOutlined />,
