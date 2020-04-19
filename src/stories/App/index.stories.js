@@ -39,9 +39,13 @@ const user = {
 };
 
 const getUser = () => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(user.get());
+      if (true) {
+        resolve(user.get());
+      } else {
+        reject('读不起。获取个人信息失败。');
+      }
     }, 1000);
   });
 };
@@ -83,7 +87,7 @@ const logout = () => {
       const success = true;
       if (success) {
         user.set(null);
-        resolve(true);
+        resolve();
       } else {
         reject('对不起，退出失败。请重试。');
       }
