@@ -5,7 +5,14 @@ import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default ({ opened = true, title, children, extra, onOpenedChange }) => {
+export default ({
+  opened = true,
+  bordered = true,
+  title,
+  children,
+  extra,
+  onOpenedChange,
+}) => {
   const [oped, setOped] = useState();
 
   const onChange = useCallback(() => {
@@ -25,6 +32,7 @@ export default ({ opened = true, title, children, extra, onOpenedChange }) => {
     <div
       className={cx(styles['spreader'], {
         closed: !oped,
+        bordered: bordered,
       })}
     >
       <div className={styles['header']}>
