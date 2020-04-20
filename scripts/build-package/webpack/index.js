@@ -3,6 +3,8 @@ const path = require('path');
 const rimraf = require('rimraf');
 const webpack = require('webpack');
 
+const configFactory = require('./webpack.config.js');
+
 const originalPackageInfo = require(path.join(process.cwd(), 'package.json'));
 const tsconfig = require(path.join(process.cwd(), 'tsconfig.json'));
 
@@ -45,19 +47,6 @@ const createEntryDFile = async () => {
   fs.writeFileSync(path.join(packageFolder, 'index.d.ts'), content);
 };
 
-const createInputOptions = async () => {
-  return {
-    entry: entryFile,
-  };
-};
-
-const createOutputOptions = async () => {
-  return {
-    path: packageFolder,
-    filename: 'index.js',
-  };
-};
-
 const removePackageFolder = async () => {
   await new Promise((resolve, reject) => {
     rimraf(packageFolder, (err) => {
@@ -67,14 +56,14 @@ const removePackageFolder = async () => {
 };
 
 const build = async () => {
-  const inputOptions = await createInputOptions();
-  console.log('inputOptions:', inputOptions);
-  const outputOptions = await createOutputOptions();
-  console.log('outputOptions:', outputOptions);
-
-  const options = {
-    ...inputOptions,
-    output: outputOptions,
+  const options = configFactory({
+    componentsPath,
+    webpackEnv: 'production',
+  });
+  options.entry = entryFile;
+  options.output = {
+    path: packageFolder,
+    filename: 'index.js',
   };
 
   console.log('options:', options);
@@ -83,12 +72,14 @@ const build = async () => {
     const compiler = webpack(options);
     compiler.run((err, stats) => {
       if (err) {
-        console.log('err:', err);
+        console.log('run. err:', err);
         reject(err);
       } else {
         resolve();
       }
     });
+  }).catch((err) => {
+    console.log('catch. err:', err);
   });
   // await createEntryDFile();
 };
@@ -123,11 +114,10 @@ const createReadme = async () => {
 
 module.exports = async () => {
   await removePackageFolder();
-  await removeEntryFile();
-  await createEntryFile();
+  // await removeEntryFile();
+  // await createEntryFile();
   await build();
-  return;
-  await removeEntryFile();
-  await createPackageDotJson();
-  await createReadme();
+  // await removeEntryFile();
+  // await createPackageDotJson();
+  // await createReadme();
 };

@@ -1,5 +1,5 @@
 const byRollup = require('./by-rollup');
-const byWebpack = require('./by-webpack');
+const byWebpack = require('./webpack');
 
-byRollup();
-// byWebpack();
+// byRollup();
+byWebpack();
