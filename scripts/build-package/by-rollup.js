@@ -13,7 +13,7 @@ const postcss = require('rollup-plugin-postcss');
 const { uglify } = require('rollup-plugin-uglify');
 const cssUrl = require('postcss-url');
 
-const originalPackageInfo = require('../package.json');
+const originalPackageInfo = require(path.join(process.cwd(), 'package.json'));
 
 const entryFileName = '_index.js';
 const tsconfigPath = path.join(process.cwd(), 'tsconfig.json');
@@ -21,7 +21,7 @@ const tsconfig = require(tsconfigPath);
 // console.log('tsconfig:', tsconfig);
 // console.log('tsconfigPath:', tsconfigPath);
 const componentsPath = path.join(process.cwd(), 'src', 'components');
-const packageFolder = path.join(process.cwd(), '.package');
+const packageFolder = path.join(process.cwd(), '.package/by-rollup');
 const entryFile = path.join(componentsPath, entryFileName);
 // console.log('process.cwd():', process.cwd());
 // console.log('componentsPath:', componentsPath);
@@ -50,8 +50,7 @@ const createEntryFile = async () => {
     })
     .map((dir) => {
       return `export { default as ${dir} } from './${dir}';`;
-    })
-    .concat([`export const version = '${originalPackageInfo.version}';`]);
+    });
 
   fs.writeFileSync(entryFile, list.join('\r\n'));
 };
@@ -190,7 +189,7 @@ const createReadme = async () => {
   fs.copyFileSync(src, dest);
 };
 
-(async () => {
+module.exports = async () => {
   await removePackageFolder();
   await removeEntryFile();
   await createEntryFile();
@@ -199,4 +198,4 @@ const createReadme = async () => {
   await renamePackageFile();
   await createPackageDotJson();
   await createReadme();
-})();
+};
