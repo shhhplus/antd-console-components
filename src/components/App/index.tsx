@@ -12,7 +12,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import { Layout } from 'antd';
+import { Layout, message } from 'antd';
 import DefaultInitializing from '../Initializing';
 import { Account } from '../headers';
 import RouteMenu from '../RouteMenu';
@@ -60,9 +60,20 @@ export default ({
   }, [Initializing]);
 
   const getUser2use = useCallback(() => {
-    return getUser().finally(() => {
-      setInitialized(true);
-    });
+    return getUser()
+      .then(
+        (res) => {
+          return res;
+        },
+        (msg) => {
+          message.error({
+            content: msg,
+          });
+        },
+      )
+      .finally(() => {
+        setInitialized(true);
+      });
   }, [getUser]);
 
   const getPermission2use = useCallback(() => {
