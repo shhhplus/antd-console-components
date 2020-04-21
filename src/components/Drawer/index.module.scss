@@ -1,8 +1,15 @@
 .drawer {
   :global {
+    .ant-drawer-open {
+      .ant-drawer-close {
+        left: -32px;
+      }
+    }
+
     .ant-drawer-close {
-      left: -32px;
       overflow: hidden;
+      left: 0;
+      transition: all 0.3s;
 
       .anticon-close {
         margin-left: -12px;
