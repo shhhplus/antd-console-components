@@ -2,29 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 const { rollup } = require('rollup');
-const typescript = require('@rollup/plugin-typescript');
-const commonjs = require('@rollup/plugin-commonjs');
-const resolve = require('@rollup/plugin-node-resolve');
-const json = require('@rollup/plugin-json');
-const url = require('@rollup/plugin-url');
-const babel = require('rollup-plugin-babel');
-const svg = require('rollup-plugin-svg');
-const postcss = require('rollup-plugin-postcss');
-const { uglify } = require('rollup-plugin-uglify');
-const cssUrl = require('postcss-url');
+const configFactory = require('./rollup.config.js');
 
 const originalPackageInfo = require(path.join(process.cwd(), 'package.json'));
 
 const entryFileName = '_index.js';
-const tsconfigPath = path.join(process.cwd(), 'tsconfig.json');
-const tsconfig = require(tsconfigPath);
-// console.log('tsconfig:', tsconfig);
-// console.log('tsconfigPath:', tsconfigPath);
 const componentsPath = path.join(process.cwd(), 'src', 'components');
 const packageFolder = path.join(process.cwd(), '.package/by-rollup');
 const entryFile = path.join(componentsPath, entryFileName);
-// console.log('process.cwd():', process.cwd());
-// console.log('componentsPath:', componentsPath);
 
 const removeFile = async (filePath) => {
   if (!fs.existsSync(filePath)) {
@@ -60,50 +45,6 @@ const createEntryDFile = async () => {
   fs.writeFileSync(path.join(packageFolder, 'index.d.ts'), content);
 };
 
-const createInputOptions = async () => {
-  const extensions = ['.js', '.jsx', '.ts', '.tsx'];
-  return {
-    input: entryFile,
-    plugins: [
-      babel({
-        // exclude: 'node_modules/**',
-        extensions,
-      }),
-      uglify({
-        mangle: false,
-        compress: {
-          pure_funcs: ['console.log'],
-        },
-      }),
-      postcss({
-        modules: true,
-        plugins: [cssUrl({ url: 'inline' })],
-      }),
-      json(),
-      svg(),
-      url({
-        limit: 50 * 1024, // inline files < 10k, copy files > 10k
-      }),
-      resolve({
-        preferBuiltins: true,
-        extensions,
-      }),
-      commonjs({
-        namedExports: {
-          'react-is': ['isValidElementType'],
-        },
-      }),
-      typescript({
-        tsconfig: false,
-        ...tsconfig.compilerOptions,
-        outDir: path.join(packageFolder, 'outDir'),
-        include: [componentsPath],
-      }),
-    ],
-    external: [...Object.keys(originalPackageInfo.dependencies), 'path'],
-  };
-};
-
 const createOutputOptions = async () => {
   return {
     dir: packageFolder,
@@ -123,7 +64,11 @@ const removePackageFolder = async () => {
 };
 
 const build = async () => {
-  const inputOptions = await createInputOptions();
+  const inputOptions = configFactory({
+    entryFile,
+    packageFolder,
+    componentsPath,
+  });
   // console.log('inputOptions:', inputOptions);
   const outputOptions = await createOutputOptions();
   // console.log('outputOptions:', outputOptions);
@@ -175,8 +120,6 @@ const renamePackageFile = async () => {
         : null;
     })
     .filter((item) => item);
-
-  // console.log('toRenameTasks:', toRenameTasks);
 
   for (let task of toRenameTasks) {
     fs.renameSync(task.oldPath, task.newPath);
