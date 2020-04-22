@@ -22,7 +22,7 @@ import { UserContext, PermissionContext } from '../_contexts';
 import { filterMenus } from './utils';
 import styles from './index.module.scss';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer: AntdFooter, Sider } = Layout;
 
 interface LoginProps {
   onSuccess: () => void;
@@ -37,6 +37,7 @@ interface Props {
   Login: ComponentType<LoginProps>;
   Initializing: ComponentType<any>;
   headers?: ReactNode;
+  Footer: ComponentType<any>;
 }
 
 const _sider_width = [80, 200];
@@ -50,6 +51,7 @@ export default ({
   routes,
   menus,
   headers,
+  Footer,
 }: Props) => {
   const [initialized, setInitialized] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -177,7 +179,11 @@ export default ({
                     ) : null}
                   </Switch>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>this is footer</Footer>
+                {Footer && (
+                  <AntdFooter>
+                    <Footer />
+                  </AntdFooter>
+                )}
               </Layout>
             </Layout>
           </Router>

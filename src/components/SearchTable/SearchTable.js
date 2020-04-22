@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Table, message } from 'antd';
 import styles from './index.module.scss';
 import Column from './Column';
@@ -150,7 +150,7 @@ export default function SearchTable({
   }, [children, columns]);
 
   return (
-    <Fragment>
+    <div className={styles['search-table']}>
       {header ? <div className={styles['header']}>{header}</div> : null}
       <Table
         {...rest}
@@ -170,6 +170,6 @@ export default function SearchTable({
           setBegin(true);
         }}
       />
-    </Fragment>
+    </div>
   );
 }

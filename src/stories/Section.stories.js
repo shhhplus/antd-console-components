@@ -66,12 +66,20 @@ storiesOf('Section', module)
   .add('多个', () => {
     return (
       <Demo>
-        <Section onFresh={() => {}}>{content}</Section>
-        <Section title="我的应用">{content}</Section>
-        <Section title="我的服务" onFresh={() => {}}>
-          {content}
-        </Section>
-        <Section title="我的集群">{content}</Section>
+        <Space
+          size={20}
+          direction="vertical"
+          style={{
+            width: '100%',
+          }}
+        >
+          <Section onFresh={() => {}}>{content}</Section>
+          <Section title="我的应用">{content}</Section>
+          <Section title="我的服务" onFresh={() => {}}>
+            {content}
+          </Section>
+          <Section title="我的集群">{content}</Section>
+        </Space>
       </Demo>
     );
   });
