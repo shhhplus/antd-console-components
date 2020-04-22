@@ -6,8 +6,9 @@
 }
 
 .body {
-  margin: 24px;
+  margin: 24px 24px 0 24px;
 }
 
-.footer {
+.body + .footer {
+  margin-top: 24px;
 }

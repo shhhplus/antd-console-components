@@ -12,7 +12,7 @@ export default ({ header, children, footer }: Props) => {
     <div className={styles['page']}>
       <div className={styles['header']}>{header}</div>
       <div className={styles['body']}>{children}</div>
-      <div className={styles['footer']}>{footer}</div>
+      {footer && <div className={styles['footer']}>{footer}</div>}
     </div>
   );
 };
