@@ -9,6 +9,7 @@ import { Menu } from 'antd';
 import Initializing from './Initializing';
 import App from '../../components/App';
 import Login from '../../components/Login';
+import Footer from './Footer';
 import { Account } from '../../components/headers';
 import menus from './menus';
 import Dashboard from './Dashboard';
@@ -120,6 +121,7 @@ const Demo = () => {
     <App
       Initializing={Initializing}
       Login={LoginPage}
+      Footer={Footer}
       getUser={getUser}
       getPermission={getPermission}
       logout={logout}
