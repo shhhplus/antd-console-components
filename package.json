@@ -1,6 +1,6 @@
 {
   "name": "antd-console-components",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "基于 react 16.x、antd 4.x、react-router-dom 5.x 封装的控制台组件库。",
   "homepage": "https://github.com/shhhplus/antd-console-components",
   "main": "index.js",
