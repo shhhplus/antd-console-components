@@ -3,30 +3,48 @@ import { Drawer } from 'antd';
 import styles from './index.module.scss';
 
 export default (props) => {
-  const ref = useRef();
+  const containerRef = useRef();
+  const bodyOverflowRef = useRef(undefined);
+
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     setVisible(props.visible);
   }, [props.visible]);
 
+  useEffect(() => {
+    if (visible) {
+      debugger;
+      document.body.style.overflow = 'hidden';
+    } else {
+      if (bodyOverflowRef.current !== undefined) {
+        debugger;
+        document.body.style.overflow = bodyOverflowRef.current;
+      }
+    }
+  }, [visible]);
+
+  useEffect(() => {
+    debugger;
+    bodyOverflowRef.current = document.body.style.overflow;
+  }, []);
+
   const { width = 900, onClose, ...rest } = props;
 
   return (
-    <div ref={ref} className={styles['drawer']}>
+    <div ref={containerRef} className={styles['drawer']}>
       <Drawer
         {...rest}
+        title={null}
         maskClosable={false}
         width={width}
         visible={visible}
-        title={null}
+        afterVisibleChange={setVisible}
         onClose={() => {
           setVisible(false);
           onClose && onClose();
         }}
-        getContainer={() => {
-          return ref.current;
-        }}
+        getContainer={() => containerRef.current}
       />
     </div>
   );
