@@ -75,26 +75,33 @@ storiesOf('DrawerPageLayout', module)
     };
 
     return (
-      <Drawer visible={true}>
-        <DrawerPageLayout title="我的服务">
-          <Space
-            size={20}
-            direction="vertical"
-            style={{
-              width: '100%',
-            }}
-          >
-            <Section title="基本信息">{content}</Section>
-            <Section title="模块1">{content}</Section>
-            <Section title="模块2">{content}</Section>
-            <Section title="模块3">{content}</Section>
-            <Section title="模块5">
-              {content}
-              {content}
-            </Section>
-          </Space>
-        </DrawerPageLayout>
-      </Drawer>
+      <div>
+        <ul>
+          {new Array(50).fill('').map((item, idx) => {
+            return <li key={idx}>{idx + 1}</li>;
+          })}
+        </ul>
+        <Drawer visible={true}>
+          <DrawerPageLayout title="我的服务">
+            <Space
+              size={20}
+              direction="vertical"
+              style={{
+                width: '100%',
+              }}
+            >
+              <Section title="基本信息">{content}</Section>
+              <Section title="模块1">{content}</Section>
+              <Section title="模块2">{content}</Section>
+              <Section title="模块3">{content}</Section>
+              <Section title="模块5">
+                {content}
+                {content}
+              </Section>
+            </Space>
+          </DrawerPageLayout>
+        </Drawer>
+      </div>
     );
   })
   .add('带footer', () => {

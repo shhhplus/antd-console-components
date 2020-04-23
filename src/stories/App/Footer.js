@@ -8,9 +8,10 @@ export default () => {
     <div
       style={{
         textAlign: 'center',
+        padding: '24px 0',
       }}
     >
-      这里是自定义的footer。当前用户：${user.data && user.data.name}
+      这里是自定义的footer。当前用户：{user.data && user.data.name}
     </div>
   );
 };

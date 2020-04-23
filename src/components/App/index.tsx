@@ -22,7 +22,7 @@ import { UserContext, PermissionContext } from '../_contexts';
 import { filterMenus } from './utils';
 import styles from './index.module.scss';
 
-const { Header, Content, Footer: AntdFooter, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 interface LoginProps {
   onSuccess: () => void;
@@ -179,11 +179,7 @@ export default ({
                     ) : null}
                   </Switch>
                 </Content>
-                {Footer && (
-                  <AntdFooter>
-                    <Footer />
-                  </AntdFooter>
-                )}
+                {Footer && <Footer />}
               </Layout>
             </Layout>
           </Router>
