@@ -1,0 +1,38 @@
+.ep {
+  :global {
+    .ant-popover-inner-content {
+      padding: 0;
+    }
+  }
+
+  .content {
+    position: relative;
+    padding: 16px 15px 16px 35px;
+  }
+
+  .icon {
+    position: absolute;
+    top: 18px;
+    left: 15px;
+    color: #ec9131;
+  }
+
+  .title {
+    color: #343434;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  .desc {
+    color: #909090;
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 6px;
+  }
+
+  .actions {
+    text-align: right;
+    margin-top: 20px;
+  }
+}
