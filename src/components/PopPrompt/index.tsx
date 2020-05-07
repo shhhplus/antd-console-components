@@ -26,6 +26,7 @@ interface Props {
   actions: ReactElement | Array<ReactElement>;
   visible: boolean;
   onVisibleChange: (visible: boolean) => void;
+  arrowPointAtCenter: boolean;
 }
 
 export default ({
@@ -36,6 +37,7 @@ export default ({
   actions,
   visible,
   onVisibleChange,
+  arrowPointAtCenter,
 }: Props) => {
   const content = (
     <div className={styles['content']}>
@@ -51,10 +53,10 @@ export default ({
       content={content}
       placement={placement}
       trigger="click"
-      arrowPointAtCenter={true}
+      arrowPointAtCenter={arrowPointAtCenter}
       visible={visible}
       onVisibleChange={onVisibleChange}
-      overlayClassName={styles['ep']}
+      overlayClassName={styles['pop']}
     >
       {children}
     </Popover>
