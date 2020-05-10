@@ -129,6 +129,7 @@ export default ({ value, onChange }: Props) => {
         onChange={onMonthChange}
         style={{
           width: '80px',
+          margin: '0 8px',
         }}
       >
         {monthOptions.map((m) => {
