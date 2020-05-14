@@ -6,6 +6,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
+import StoreProvider from '../../components/StoreProvider';
 import Initializing from './Initializing';
 import App from '../../components/App';
 import Login from '../../components/Login';
@@ -118,31 +119,37 @@ const routes = [
 
 const Demo = () => {
   return (
-    <App
-      Initializing={Initializing}
-      Login={LoginPage}
-      Footer={Footer}
-      getUser={getUser}
-      getPermission={getPermission}
-      logout={logout}
-      routes={routes}
-      menus={menus}
-      headers={
-        <Fragment>
-          <Account onLogoutSubmit={logout}>
-            <Menu.Item key="uc">
-              <UserOutlined />
-              个人中心
-            </Menu.Item>
-            <Menu.Item key="settings">
-              <SettingOutlined />
-              个人设置
-            </Menu.Item>
-            <Menu.Divider />
-          </Account>
-        </Fragment>
-      }
-    />
+    <StoreProvider
+      initialState={{
+        count: 10,
+      }}
+    >
+      <App
+        Initializing={Initializing}
+        Login={LoginPage}
+        Footer={Footer}
+        getUser={getUser}
+        getPermission={getPermission}
+        logout={logout}
+        routes={routes}
+        menus={menus}
+        headers={
+          <Fragment>
+            <Account onLogoutSubmit={logout}>
+              <Menu.Item key="uc">
+                <UserOutlined />
+                个人中心
+              </Menu.Item>
+              <Menu.Item key="settings">
+                <SettingOutlined />
+                个人设置
+              </Menu.Item>
+              <Menu.Divider />
+            </Account>
+          </Fragment>
+        }
+      />
+    </StoreProvider>
   );
 };
 
