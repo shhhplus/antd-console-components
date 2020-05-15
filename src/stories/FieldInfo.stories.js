@@ -17,34 +17,40 @@ storiesOf('FieldInfo', module)
 
     const labelWidth = 60;
     const marginBottom = 10;
+    const spacing = '10px';
     return (
       <Card>
         <FieldInfo
           labelWidth={labelWidth}
+          spacing={spacing}
           marginBottom={marginBottom}
           label="姓名"
           value="汤姆克鲁斯"
         />
         <FieldInfo
           labelWidth={labelWidth}
+          spacing={spacing}
           marginBottom={marginBottom}
           label="国籍"
           value="美国"
         />
         <FieldInfo
           labelWidth={labelWidth}
+          spacing={spacing}
           marginBottom={marginBottom}
           label="学校"
-          value=""
+          value="-"
         />
         <FieldInfo
           labelWidth={labelWidth}
+          spacing={spacing}
           marginBottom={marginBottom}
           label="性别"
           value="男"
         />
         <FieldInfo
           labelWidth={labelWidth}
+          spacing={spacing}
           marginBottom={marginBottom}
           label="代表作品"
           value="碟中谍系列、壮志凌云"
