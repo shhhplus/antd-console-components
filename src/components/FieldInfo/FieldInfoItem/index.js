@@ -1,7 +1,13 @@
 import React from 'react';
 import styles from './index.module.scss';
 
-export default ({ label, value, labelWidth, marginBottom }) => {
+export default ({
+  label,
+  value,
+  labelWidth,
+  spacing = '20px',
+  marginBottom,
+}) => {
   return (
     <div
       className={styles['fieldinfo']}
@@ -12,7 +18,8 @@ export default ({ label, value, labelWidth, marginBottom }) => {
       <div
         className={styles['key']}
         style={{
-          width: `${labelWidth}px`,
+          width: labelWidth,
+          paddingRight: spacing,
         }}
       >
         {label}

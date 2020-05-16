@@ -1,5 +1,6 @@
 import React from 'react';
-import { Row, Col, PageHeader, Space } from 'antd';
+import { Row, Col, PageHeader, Space, Button } from 'antd';
+import { useStore, withStore } from '../../components/StoreProvider';
 import PageLayout from '../../components/PageLayout';
 import FieldInfo from '../../components/FieldInfo';
 import Section from '../../components/Section';
@@ -7,6 +8,70 @@ import Spreader from '../../components/Spreader';
 
 const labelWidth = 60;
 const marginBottom = 10;
+
+const UseStoreComponent = () => {
+  const store = useStore();
+
+  const { state, setState } = store;
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>count:{state.count}</div>
+      <Space>
+        <Button
+          onClick={() => {
+            setState({
+              ...state,
+              count: state.count - 1,
+            });
+          }}
+        >
+          -
+        </Button>
+        <Button
+          onClick={() => {
+            setState({
+              ...state,
+              count: state.count + 1,
+            });
+          }}
+        >
+          +
+        </Button>
+      </Space>
+    </div>
+  );
+};
+
+const WithStoreComponent = withStore(({ store }) => {
+  const { state, setState } = store;
+  return (
+    <div>
+      <div style={{ marginBottom: '16px' }}>count:{state.count}</div>
+      <Space>
+        <Button
+          onClick={() => {
+            setState({
+              ...state,
+              count: state.count - 1,
+            });
+          }}
+        >
+          -
+        </Button>
+        <Button
+          onClick={() => {
+            setState({
+              ...state,
+              count: state.count + 1,
+            });
+          }}
+        >
+          +
+        </Button>
+      </Space>
+    </div>
+  );
+});
 
 export default () => {
   return (
@@ -91,6 +156,14 @@ export default () => {
           <div style={{ padding: '0 0 60px 0' }}>notification 1</div>
           <div style={{ padding: '0 0 60px 0' }}>notification 2</div>
           <div style={{ padding: '0 0 60px 0' }}>notification 3</div>
+        </Section>
+
+        <Section title="使用StoreProvider useStore">
+          <UseStoreComponent />
+        </Section>
+
+        <Section title="使用StoreProvider withStore">
+          <WithStoreComponent />
         </Section>
       </Space>
     </PageLayout>
