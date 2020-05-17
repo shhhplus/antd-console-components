@@ -1,10 +1,12 @@
 import React from 'react';
 import { Row, Col, PageHeader, Space, Button } from 'antd';
-import { useStore, withStore } from '../../components/StoreProvider';
+import StoreProvider from '../../components/StoreProvider';
 import PageLayout from '../../components/PageLayout';
 import FieldInfo from '../../components/FieldInfo';
 import Section from '../../components/Section';
 import Spreader from '../../components/Spreader';
+
+const { useStore, withStore } = StoreProvider;
 
 const labelWidth = 60;
 const marginBottom = 10;

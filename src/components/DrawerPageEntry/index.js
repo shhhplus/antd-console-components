@@ -16,7 +16,12 @@ import { matchPath } from 'react-router';
 import path from 'path';
 import Drawer from '../Drawer';
 
-export default ({ children, routes, drawerWidth }) => {
+export default ({
+  children,
+  routes,
+  drawerWidth,
+  keyboardClosable = false,
+}) => {
   const { url } = useRouteMatch();
   const [width, setWidth] = useState(drawerWidth);
   const [exitUrl, setExitUrl] = useState(url);
@@ -85,6 +90,7 @@ export default ({ children, routes, drawerWidth }) => {
         width={width}
         onClose={exit}
         destroyOnClose={false}
+        keyboard={keyboardClosable}
       >
         <Switch>
           {routes2use.map((route, idx) => {
