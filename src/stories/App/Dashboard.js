@@ -17,13 +17,17 @@ const UseStoreComponent = () => {
   const { state, setState } = store;
   return (
     <div>
-      <div style={{ marginBottom: '16px' }}>count:{state.count}</div>
+      <div style={{ marginBottom: '16px' }}>
+        <div>count:{state.count}</div>
+        <div>changed by:{state.by}</div>
+      </div>
       <Space>
         <Button
           onClick={() => {
             setState({
               ...state,
               count: state.count - 1,
+              by: 'useStore',
             });
           }}
         >
@@ -34,6 +38,7 @@ const UseStoreComponent = () => {
             setState({
               ...state,
               count: state.count + 1,
+              by: 'useStore',
             });
           }}
         >
@@ -48,13 +53,17 @@ const WithStoreComponent = withStore(({ store }) => {
   const { state, setState } = store;
   return (
     <div>
-      <div style={{ marginBottom: '16px' }}>count:{state.count}</div>
+      <div style={{ marginBottom: '16px' }}>
+        <div>count:{state.count}</div>
+        <div>changed by:{state.by}</div>
+      </div>
       <Space>
         <Button
           onClick={() => {
             setState({
               ...state,
               count: state.count - 1,
+              by: 'withStore',
             });
           }}
         >
@@ -65,6 +74,7 @@ const WithStoreComponent = withStore(({ store }) => {
             setState({
               ...state,
               count: state.count + 1,
+              by: 'withStore',
             });
           }}
         >
