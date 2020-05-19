@@ -1,10 +1,12 @@
 import React from 'react';
 import { Row, Col, PageHeader, Space, Button } from 'antd';
-import { useStore, withStore } from '../../components/StoreProvider';
+import StoreProvider from '../../components/StoreProvider';
 import PageLayout from '../../components/PageLayout';
 import FieldInfo from '../../components/FieldInfo';
 import Section from '../../components/Section';
 import Spreader from '../../components/Spreader';
+
+const { useStore, withStore } = StoreProvider;
 
 const labelWidth = 60;
 const marginBottom = 10;
@@ -15,13 +17,17 @@ const UseStoreComponent = () => {
   const { state, setState } = store;
   return (
     <div>
-      <div style={{ marginBottom: '16px' }}>count:{state.count}</div>
+      <div style={{ marginBottom: '16px' }}>
+        <div>count:{state.count}</div>
+        <div>changed by:{state.by}</div>
+      </div>
       <Space>
         <Button
           onClick={() => {
             setState({
               ...state,
               count: state.count - 1,
+              by: 'useStore',
             });
           }}
         >
@@ -32,6 +38,7 @@ const UseStoreComponent = () => {
             setState({
               ...state,
               count: state.count + 1,
+              by: 'useStore',
             });
           }}
         >
@@ -46,13 +53,17 @@ const WithStoreComponent = withStore(({ store }) => {
   const { state, setState } = store;
   return (
     <div>
-      <div style={{ marginBottom: '16px' }}>count:{state.count}</div>
+      <div style={{ marginBottom: '16px' }}>
+        <div>count:{state.count}</div>
+        <div>changed by:{state.by}</div>
+      </div>
       <Space>
         <Button
           onClick={() => {
             setState({
               ...state,
               count: state.count - 1,
+              by: 'withStore',
             });
           }}
         >
@@ -63,6 +74,7 @@ const WithStoreComponent = withStore(({ store }) => {
             setState({
               ...state,
               count: state.count + 1,
+              by: 'withStore',
             });
           }}
         >
