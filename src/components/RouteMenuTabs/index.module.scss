@@ -1,0 +1,22 @@
+.page {
+  display: flex;
+  background-color: #ffffff;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.page-left {
+  width: 204px;
+  border-right: 1px solid #f0f0f0;
+
+  :global {
+    .ant-menu {
+      border: none;
+    }
+  }
+}
+
+.page-right {
+  flex-grow: 1;
+  padding: 0 24px;
+}

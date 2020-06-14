@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import { useLocation, useRouteMatch, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import { convert, getMatchedLeafPaths, getMatchedPaths } from './utils';
 
@@ -68,14 +68,19 @@ interface RouteMenuProps {
     | 'vertical-left'
     | 'vertical-right'
     | 'horizontal';
+  baseUrl?: string;
   data: Array<any>;
 }
 
-export default ({ theme, mode = 'inline', data = [] }: RouteMenuProps) => {
-  const { url: baseUrl } = useRouteMatch();
+export default ({
+  theme = 'dark',
+  mode = 'inline',
+  baseUrl = '/',
+  data = [],
+}: RouteMenuProps) => {
   const location = useLocation();
   const pathname = useMemo(() => location.pathname, [location]);
-  const data2use = useMemo(() => convert(data, baseUrl), [data]);
+  const data2use = useMemo(() => convert(data, baseUrl), [data, baseUrl]);
   const [openKeys, setOpenKeys] = useState<Array<string>>([]);
   const selectedKeys: Array<string> = useMemo(() => {
     return getMatchedLeafPaths(data2use, pathname);
