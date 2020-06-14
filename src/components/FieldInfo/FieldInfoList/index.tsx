@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import FieldInfoItem from '../FieldInfoItem';
+import FieldInfoItem from '..';
 
 interface Props {
   infos: Array<any>;

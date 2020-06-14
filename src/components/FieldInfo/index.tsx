@@ -1,4 +1,5 @@
 import React, { ReactNode, ReactElement } from 'react';
+import FieldInfoList from './FieldInfoList';
 import styles from './index.module.scss';
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
   marginBottom?: number | string;
 }
 
-export default ({
+const FieldInfo = ({
   label,
   value,
   labelWidth,
@@ -36,3 +37,7 @@ export default ({
     </div>
   );
 };
+
+FieldInfo.FieldInfoList = FieldInfoList;
+
+export default FieldInfo;
