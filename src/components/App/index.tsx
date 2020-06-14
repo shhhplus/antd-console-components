@@ -16,7 +16,7 @@ import { Layout, message } from 'antd';
 import DefaultInitializing from '../Initializing';
 import { Account } from '../headers';
 import RouteMenu from '../RouteMenu';
-import { GetUser } from '../_types';
+import { GetUser } from '../types';
 import { useFetch } from '../hooks';
 import { UserContext, PermissionContext } from '../_contexts';
 import { filterMenus } from './utils';
@@ -29,15 +29,15 @@ interface LoginProps {
 }
 
 interface Props {
-  getPermission: () => Promise<any>;
+  getPermission?: () => Promise<any>;
   getUser: GetUser;
   logout: () => Promise<void>;
   routes: Array<any>;
   menus: Array<any>;
   Login: ComponentType<LoginProps>;
-  Initializing: ComponentType<any>;
+  Initializing?: ComponentType<any>;
   headers?: ReactNode;
-  Footer: ComponentType<any>;
+  Footer?: ComponentType<any>;
 }
 
 const _sider_width = [80, 200];

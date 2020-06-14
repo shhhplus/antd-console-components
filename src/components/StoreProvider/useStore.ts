@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Store } from '../_types';
+import { Store } from '../types';
 import StoreContext from './StoreContext';
 
 export default (): Store => {

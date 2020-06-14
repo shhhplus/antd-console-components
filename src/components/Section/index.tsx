@@ -1,9 +1,17 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, ReactNode } from 'react';
 import { Card } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
+import { CardProps } from 'antd/lib/card';
 
-export default ({ id, title, icon, onFresh, ...rest }) => {
+interface Props extends CardProps {
+  id?: string;
+  title?: ReactNode;
+  icon?: ReactNode;
+  onFresh?: () => void;
+}
+
+export default ({ id, title, icon, onFresh, ...rest }: Props) => {
   const title2use = useMemo(() => {
     if (!title) {
       return null;

@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 import styles from './index.module.scss';
+
+interface Props {
+  label: ReactElement | string;
+  value: ReactNode;
+  labelWidth?: number | string;
+  spacing?: number | string;
+  marginBottom?: number | string;
+}
 
 export default ({
   label,
   value,
   labelWidth,
   spacing = '20px',
-  marginBottom,
-}) => {
+  marginBottom = 0,
+}: Props) => {
   return (
     <div
       className={styles['fieldinfo']}

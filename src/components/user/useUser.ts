@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { UseUserResult } from '../_types';
+import { UseUserResult } from '../types';
 import { UserContext } from '../_contexts';
 
 const useUser = (): UseUserResult => {

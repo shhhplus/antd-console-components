@@ -4,6 +4,7 @@ import React, {
   useState,
   useCallback,
   useMemo,
+  ReactNode,
 } from 'react';
 import {
   Switch,
@@ -16,12 +17,19 @@ import { matchPath } from 'react-router';
 import path from 'path';
 import Drawer from '../Drawer';
 
+interface Props {
+  children: ReactNode;
+  routes: Array<any>;
+  drawerWidth: number | string;
+  keyboardClosable?: boolean;
+}
+
 export default ({
   children,
   routes,
   drawerWidth,
   keyboardClosable = false,
-}) => {
+}: Props) => {
   const { url } = useRouteMatch();
   const [width, setWidth] = useState(drawerWidth);
   const [exitUrl, setExitUrl] = useState(url);
@@ -39,7 +47,7 @@ export default ({
         return matchPath(pathname, {
           ...route,
           path: Array.isArray(route.path)
-            ? route.path.map((p) => path.join(url, p))
+            ? route.path.map((p: string) => path.join(url, p))
             : path.join(url, route.path),
         });
       })
@@ -65,7 +73,7 @@ export default ({
     console.log('[DrawerPageEntry] routes changed');
     return (routes || []).map((route) => {
       const OriginalComponent = route.component;
-      const WrappedComp = (props) => {
+      const WrappedComp = (props: any) => {
         useEffect(() => {
           console.log('[DrawerPageEntry] subpage onMounted:', route);
           setWidth(route.width || drawerWidth);
@@ -75,7 +83,7 @@ export default ({
 
       return {
         path: Array.isArray(route.path)
-          ? route.path.map((p) => path.join(url, p))
+          ? route.path.map((p: string) => path.join(url, p))
           : path.join(url, route.path),
         component: WrappedComp,
       };

@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react';
-// import { UseUserResult } from '../_types';
+// import { UseUserResult } from '../types';
 import useUser from './useUser';
 
 // type HOC<InjectedProps> = <Props extends InjectedProps>(

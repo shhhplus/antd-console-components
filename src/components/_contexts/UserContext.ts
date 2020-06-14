@@ -1,4 +1,4 @@
 import { createContext } from 'react';
-import { UseUserResult } from '../_types';
+import { UseUserResult } from '../types';
 
 export default createContext<UseUserResult | null>(null);

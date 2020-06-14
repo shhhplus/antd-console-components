@@ -1,9 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, ReactNode } from 'react';
 import classNames from 'classnames/bind';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 
 const cx = classNames.bind(styles);
+
+interface Props {
+  opened?: boolean;
+  bordered?: boolean;
+  title: ReactNode;
+  children?: ReactNode;
+  extra?: ReactNode;
+  onOpenedChange?: (opened: boolean) => void;
+}
 
 export default ({
   opened = true,
@@ -12,8 +21,8 @@ export default ({
   children,
   extra,
   onOpenedChange,
-}) => {
-  const [oped, setOped] = useState();
+}: Props) => {
+  const [oped, setOped] = useState<boolean>(false);
 
   const onChange = useCallback(() => {
     const newVal = !oped;
