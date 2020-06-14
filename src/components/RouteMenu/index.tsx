@@ -6,23 +6,11 @@ import React, {
   useMemo,
   useRef,
 } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, useRouteMatch, Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import { convert, getMatchedLeafPaths, getMatchedPaths } from './utils';
 
 const { Item, SubMenu, ItemGroup } = Menu;
-
-// const isSubMenuConf = (
-//   c: MenuItemConf | SubMenuConf | MenuItemGroupConf,
-// ): c is SubMenuConf => {
-//   return (c as SubMenuConf).type === 'sub';
-// };
-
-// const isMenuItemGroupConf = (
-//   c: MenuItemConf | SubMenuConf | MenuItemGroupConf,
-// ): boolean => {
-//   return true;
-// };
 
 const Title = ({ icon, name }: { icon?: ReactNode; name: string }) => {
   return (
@@ -72,10 +60,22 @@ const CustomizedGroup = ({ icon, name, children, ...rest }: any) => {
   );
 };
 
-export default ({ data = [] }: { data: Array<any> }) => {
+interface RouteMenuProps {
+  theme?: 'dark' | 'light';
+  mode?:
+    | 'inline'
+    | 'vertical'
+    | 'vertical-left'
+    | 'vertical-right'
+    | 'horizontal';
+  data: Array<any>;
+}
+
+export default ({ theme, mode = 'inline', data = [] }: RouteMenuProps) => {
+  const { url: baseUrl } = useRouteMatch();
   const location = useLocation();
   const pathname = useMemo(() => location.pathname, [location]);
-  const data2use = useMemo(() => convert(data, ''), [data]);
+  const data2use = useMemo(() => convert(data, baseUrl), [data]);
   const [openKeys, setOpenKeys] = useState<Array<string>>([]);
   const selectedKeys: Array<string> = useMemo(() => {
     return getMatchedLeafPaths(data2use, pathname);
@@ -98,8 +98,8 @@ export default ({ data = [] }: { data: Array<any> }) => {
 
   return (
     <Menu
-      theme="dark"
-      mode="inline"
+      theme={theme}
+      mode={mode}
       openKeys={openKeys}
       selectedKeys={selectedKeys}
       onOpenChange={setOpenKeys}
