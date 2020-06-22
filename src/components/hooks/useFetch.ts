@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
-import { UseFetchResult } from '../_types';
+import { UseFetchResult } from '../types';
 
 const _InitialData = null;
 

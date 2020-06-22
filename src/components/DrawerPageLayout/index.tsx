@@ -1,17 +1,27 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, ReactNode } from 'react';
 import { PageHeader } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 
+interface Props {
+  title: ReactNode;
+  children: ReactNode;
+  footer?: ReactNode;
+  extra?: ReactNode;
+  fullfilled?: boolean;
+  onFresh?: () => void;
+  onBack?: () => void;
+}
+
 export default ({
   title,
-  onFresh,
-  extra,
   children,
   footer,
-  onBack,
+  extra,
   fullfilled,
-}) => {
+  onFresh,
+  onBack,
+}: Props) => {
   const title2use = useMemo(() => {
     return (
       <div>

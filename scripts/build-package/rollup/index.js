@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 const rimraf = require('rimraf');
 const { rollup } = require('rollup');
@@ -31,7 +32,7 @@ const createEntryFile = async () => {
   const dirs = fs.readdirSync(componentsPath);
   const list = dirs
     .filter((dir) => {
-      return dir[0] !== '.' && dir[0] !== '_';
+      return dir[0] !== '.' && dir[0] !== '_' && ['types'].indexOf(dir) === -1;
     })
     .map((dir) => {
       return `export { default as ${dir} } from './${dir}';`;
@@ -40,9 +41,11 @@ const createEntryFile = async () => {
   fs.writeFileSync(entryFile, list.join('\r\n'));
 };
 
-const createEntryDFile = async () => {
-  const content = fs.readFileSync(entryFile);
-  fs.writeFileSync(path.join(packageFolder, 'index.d.ts'), content);
+const createD = () => {
+  const src = path.join(packageFolder, 'declaration/src/components');
+  const dest = path.join(packageFolder);
+  fse.copySync(src, dest);
+  fse.removeSync(path.join(packageFolder, 'declaration'));
 };
 
 const createOutputOptions = async () => {
@@ -74,7 +77,6 @@ const build = async () => {
   // console.log('outputOptions:', outputOptions);
   const bundle = await rollup(inputOptions);
   await bundle.write(outputOptions);
-  await createEntryDFile();
 };
 
 const createPackageDotJson = async () => {
@@ -137,6 +139,7 @@ module.exports = async () => {
   await removeEntryFile();
   await createEntryFile();
   await build();
+  await createD();
   await removeEntryFile();
   await renamePackageFile();
   await createPackageDotJson();

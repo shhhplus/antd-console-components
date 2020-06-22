@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { UsePermissionResult } from '../_types';
+import { UsePermissionResult } from '../types';
 import { PermissionContext } from '../_contexts';
 
 const usePermission = (): UsePermissionResult => {

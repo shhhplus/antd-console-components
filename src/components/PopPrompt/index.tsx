@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode, ReactElement } from 'react';
 import { Popover } from 'antd';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import styles from './index.module.scss';
@@ -19,14 +19,14 @@ type Placement =
   | undefined;
 
 interface Props {
-  title: ReactElement;
-  desc: ReactElement;
+  title: ReactNode;
+  desc: ReactNode;
   placement: Placement;
   children: ReactElement;
-  actions: ReactElement | Array<ReactElement>;
+  actions: ReactNode;
   visible: boolean;
   onVisibleChange: (visible: boolean) => void;
-  arrowPointAtCenter: boolean;
+  arrowPointAtCenter?: boolean;
 }
 
 export default ({

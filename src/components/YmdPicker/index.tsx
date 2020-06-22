@@ -8,8 +8,8 @@ interface Value {
 }
 
 interface Props {
-  value: Value;
-  onChange: (value: Value) => void;
+  value?: Value;
+  onChange?: (value: Value) => void;
 }
 
 const now = (() => {
@@ -60,6 +60,9 @@ export default ({ value, onChange }: Props) => {
 
   const onYearChange = useCallback(
     (year) => {
+      if (!onChange) {
+        return;
+      }
       const maxDate = createMaxDateOfMonth(year, value2use.month);
       const date = value2use.date > maxDate ? maxDate : value2use.date;
       onChange({
@@ -73,6 +76,9 @@ export default ({ value, onChange }: Props) => {
 
   const onMonthChange = useCallback(
     (month) => {
+      if (!onChange) {
+        return;
+      }
       const maxDate = createMaxDateOfMonth(value2use.year, month);
       const date = value2use.date > maxDate ? maxDate : value2use.date;
       onChange({
@@ -86,6 +92,9 @@ export default ({ value, onChange }: Props) => {
 
   const onDateChange = useCallback(
     (date) => {
+      if (!onChange) {
+        return;
+      }
       onChange({
         ...value2use,
         date,

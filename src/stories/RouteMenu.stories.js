@@ -98,7 +98,7 @@ const StandardDemo = () => {
         </Link>
       </div>
       <div style={{ width: 256, margin: '0 0 0 50px' }}>
-        <RouteMenu data={data} />
+        <RouteMenu theme="light" mode="inline" data={data} />
       </div>
     </Router>
   );

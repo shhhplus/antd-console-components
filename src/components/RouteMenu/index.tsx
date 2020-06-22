@@ -12,18 +12,6 @@ import { convert, getMatchedLeafPaths, getMatchedPaths } from './utils';
 
 const { Item, SubMenu, ItemGroup } = Menu;
 
-// const isSubMenuConf = (
-//   c: MenuItemConf | SubMenuConf | MenuItemGroupConf,
-// ): c is SubMenuConf => {
-//   return (c as SubMenuConf).type === 'sub';
-// };
-
-// const isMenuItemGroupConf = (
-//   c: MenuItemConf | SubMenuConf | MenuItemGroupConf,
-// ): boolean => {
-//   return true;
-// };
-
 const Title = ({ icon, name }: { icon?: ReactNode; name: string }) => {
   return (
     <Fragment>
@@ -72,10 +60,27 @@ const CustomizedGroup = ({ icon, name, children, ...rest }: any) => {
   );
 };
 
-export default ({ data = [] }: { data: Array<any> }) => {
+interface RouteMenuProps {
+  theme?: 'dark' | 'light';
+  mode?:
+    | 'inline'
+    | 'vertical'
+    | 'vertical-left'
+    | 'vertical-right'
+    | 'horizontal';
+  baseUrl?: string;
+  data: Array<any>;
+}
+
+export default ({
+  theme = 'dark',
+  mode = 'inline',
+  baseUrl = '/',
+  data = [],
+}: RouteMenuProps) => {
   const location = useLocation();
   const pathname = useMemo(() => location.pathname, [location]);
-  const data2use = useMemo(() => convert(data, ''), [data]);
+  const data2use = useMemo(() => convert(data, baseUrl), [data, baseUrl]);
   const [openKeys, setOpenKeys] = useState<Array<string>>([]);
   const selectedKeys: Array<string> = useMemo(() => {
     return getMatchedLeafPaths(data2use, pathname);
@@ -98,8 +103,8 @@ export default ({ data = [] }: { data: Array<any> }) => {
 
   return (
     <Menu
-      theme="dark"
-      mode="inline"
+      theme={theme}
+      mode={mode}
       openKeys={openKeys}
       selectedKeys={selectedKeys}
       onOpenChange={setOpenKeys}

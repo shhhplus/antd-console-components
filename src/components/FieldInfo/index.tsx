@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { ReactNode, ReactElement } from 'react';
+import FieldInfoList from './FieldInfoList';
 import styles from './index.module.scss';
 
-export default ({
+interface Props {
+  label: ReactElement | string;
+  value: ReactNode;
+  labelWidth?: number | string;
+  spacing?: number | string;
+  marginBottom?: number | string;
+}
+
+const FieldInfo = ({
   label,
   value,
   labelWidth,
   spacing = '20px',
-  marginBottom,
-}) => {
+  marginBottom = 0,
+}: Props) => {
   return (
     <div
       className={styles['fieldinfo']}
@@ -28,3 +37,7 @@ export default ({
     </div>
   );
 };
+
+FieldInfo.FieldInfoList = FieldInfoList;
+
+export default FieldInfo;

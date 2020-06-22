@@ -1,5 +1,5 @@
 const path = require('path');
-const typescript = require('@rollup/plugin-typescript');
+const typescript = require('rollup-plugin-typescript2');
 const commonjs = require('@rollup/plugin-commonjs');
 const resolve = require('@rollup/plugin-node-resolve');
 const json = require('@rollup/plugin-json');
@@ -47,10 +47,16 @@ module.exports = ({ entryFile, packageFolder, componentsPath }) => {
         },
       }),
       typescript({
-        tsconfig: false,
-        ...tsconfig.compilerOptions,
         outDir: path.join(packageFolder, 'outDir'),
         include: [componentsPath],
+        tsconfigOverride: {
+          compilerOptions: {
+            ...tsconfig.compilerOptions,
+            declaration: true,
+            declarationDir: path.join(packageFolder, 'declaration'),
+          },
+        },
+        useTsconfigDeclarationDir: true,
       }),
     ],
     external: [...Object.keys(originalPackageInfo.dependencies), 'path'],

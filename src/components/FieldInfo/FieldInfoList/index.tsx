@@ -1,7 +1,14 @@
 import React, { Fragment } from 'react';
-import FieldInfoItem from '../FieldInfoItem';
+import FieldInfoItem from '..';
 
-export default ({ infos = [], labelWidth, spacing, marginBottom }) => {
+interface Props {
+  infos: Array<any>;
+  labelWidth?: number | string;
+  spacing?: number | string;
+  marginBottom?: number | string;
+}
+
+export default ({ infos, labelWidth, spacing, marginBottom }: Props) => {
   return (
     <Fragment>
       {infos.map(({ label, value }, idx) => {
